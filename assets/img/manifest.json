@@ -1,0 +1,338 @@
+{
+ "pier-length": {
+  "role": "hero",
+  "widths": [
+   960,
+   1440,
+   1920,
+   2560
+  ],
+  "w": 4000,
+  "h": 2252,
+  "pos": "50% 55%",
+  "alt": "The LoveQuay pier stretching west into Lake Ontario at dusk, mooring bollards lining the deck",
+  "src": "20260908_191358.jpg"
+ },
+ "dive-westmouth": {
+  "role": "hero",
+  "widths": [
+   960,
+   1440,
+   1920,
+   2560
+  ],
+  "w": 3840,
+  "h": 2160,
+  "pos": "60% 50%",
+  "alt": "A swimmer diving from the west end of the pier into open water, the Toronto skyline behind",
+  "src": "cap_20260908_172253_00.00.06_05.jpg"
+ },
+ "dive-steve": {
+  "role": "wide",
+  "widths": [
+   640,
+   960,
+   1440,
+   1920
+  ],
+  "w": 3840,
+  "h": 2160,
+  "pos": "50% 50%",
+  "alt": "A swimmer mid-dive off the westernmost end of LoveQuay into Lake Ontario",
+  "src": "SteveMann_jumping_into_LakeOntario_at_Westmouth_cap_20210720_142205.jpg"
+ },
+ "dive-arc": {
+  "role": "wide",
+  "widths": [
+   640,
+   960,
+   1440,
+   1920
+  ],
+  "w": 3840,
+  "h": 2160,
+  "pos": "50% 50%",
+  "alt": "A swimmer arcing into the lake beside the pier's safety ladder",
+  "src": "cap_20260908_172053_00.00.07_01.jpg"
+ },
+ "love-wall": {
+  "role": "wide",
+  "widths": [
+   640,
+   960,
+   1440,
+   1920
+  ],
+  "w": 4000,
+  "h": 2252,
+  "pos": "50% 45%",
+  "alt": "The LOVE public art installation at the east end of the quay, painted white concrete with tall red letters",
+  "src": "20260907_194617.jpg"
+ },
+ "love-wall-evening": {
+  "role": "card",
+  "widths": [
+   400,
+   640,
+   960,
+   1440
+  ],
+  "w": 4000,
+  "h": 2252,
+  "pos": "50% 45%",
+  "alt": "The LOVE installation seen from the roadway with the Toronto skyline and lake beyond",
+  "src": "20260908_171003.jpg"
+ },
+ "love-bollard": {
+  "role": "card",
+  "widths": [
+   400,
+   640,
+   960,
+   1440
+  ],
+  "w": 2098,
+  "h": 2096,
+  "pos": "50% 50%",
+  "alt": "A red and white bollard painted with the word LOVE on the pier, CN Tower in the distance",
+  "src": "20260908_191058-EDIT.jpg"
+ },
+ "love-bollard-summer": {
+  "role": "wide",
+  "widths": [
+   640,
+   960,
+   1440,
+   1920
+  ],
+  "w": 4000,
+  "h": 2248,
+  "pos": "50% 50%",
+  "alt": "A LOVE-painted planter at the pier's edge on a clear summer afternoon",
+  "src": "20210729_144657-EDIT.jpg"
+ },
+ "sunset-swimmers": {
+  "role": "hero",
+  "widths": [
+   960,
+   1440,
+   1920,
+   2560
+  ],
+  "w": 4000,
+  "h": 2252,
+  "pos": "50% 50%",
+  "alt": "People gathered on the quay deck watching the sun set over the lake",
+  "src": "20260907_192112.jpg"
+ },
+ "sunset-water": {
+  "role": "wide",
+  "widths": [
+   640,
+   960,
+   1440,
+   1920
+  ],
+  "w": 4000,
+  "h": 2252,
+  "pos": "50% 50%",
+  "alt": "Low sun over open water at the west end of the pier",
+  "src": "20260907_190225.jpg"
+ },
+ "pier-people": {
+  "role": "wide",
+  "widths": [
+   640,
+   960,
+   1440,
+   1920
+  ],
+  "w": 4000,
+  "h": 2252,
+  "pos": "50% 45%",
+  "alt": "Neighbours walking and talking along the wide concrete deck of the quay",
+  "src": "20260907_194144.jpg"
+ },
+ "pier-picnic": {
+  "role": "card",
+  "widths": [
+   400,
+   640,
+   960,
+   1440
+  ],
+  "w": 3180,
+  "h": 1798,
+  "pos": "50% 50%",
+  "alt": "A group sitting on the pier at golden hour with a picnic blanket spread out",
+  "src": "20260907_194147.jpg"
+ },
+ "danger-sign": {
+  "role": "wide",
+  "widths": [
+   640,
+   960,
+   1440,
+   1920
+  ],
+  "w": 4000,
+  "h": 2252,
+  "pos": "50% 40%",
+  "alt": "A City of Toronto sign reading Danger, Use at Own Risk, Walkway Not Owned or Maintained by The City of Toronto",
+  "src": "20260907_163717.jpg"
+ },
+ "danger-post": {
+  "role": "card",
+  "widths": [
+   400,
+   640,
+   960,
+   1440
+  ],
+  "w": 2252,
+  "h": 4000,
+  "pos": "50% 50%",
+  "alt": "A Danger, Use at Own Risk sign on a post at the very edge of the pier, open water behind it",
+  "src": "20260907_163712.jpg"
+ },
+ "broken-edge": {
+  "role": "card",
+  "widths": [
+   400,
+   640,
+   960,
+   1440
+  ],
+  "w": 2252,
+  "h": 4000,
+  "pos": "50% 60%",
+  "alt": "A broken section of the concrete deck exposing a dark void below, next to a walker's feet",
+  "src": "20260907_164135.jpg"
+ },
+ "debris": {
+  "role": "card",
+  "widths": [
+   400,
+   640,
+   960,
+   1440
+  ],
+  "w": 4000,
+  "h": 2252,
+  "pos": "50% 55%",
+  "alt": "Broken concrete and washed-up litter along the rubble edge of the quay",
+  "src": "20260907_164150.jpg"
+ },
+ "litter-bag": {
+  "role": "card",
+  "widths": [
+   400,
+   640,
+   960,
+   1440
+  ],
+  "w": 4000,
+  "h": 2252,
+  "pos": "50% 55%",
+  "alt": "A bag of collected litter and scattered rubbish gathered at the shoreline during a cleanup",
+  "src": "20260908_190618.jpg"
+ },
+ "chalk-lovequay": {
+  "role": "wide",
+  "widths": [
+   640,
+   960,
+   1440,
+   1920
+  ],
+  "w": 4000,
+  "h": 2252,
+  "pos": "50% 45%",
+  "alt": "The words LOVE Quay written in chalk on the concrete deck beside a picnic laid out on the pier",
+  "src": "20260908_175428.jpg"
+ },
+ "chalk-swimpier": {
+  "role": "card",
+  "widths": [
+   400,
+   640,
+   960,
+   1440
+  ],
+  "w": 4000,
+  "h": 2252,
+  "pos": "45% 45%",
+  "alt": "LOVE Quay Swim Pier written in chalk on the pier deck alongside a drawing of a ladder",
+  "src": "20260908_190052.jpg"
+ },
+ "shoreline": {
+  "role": "wide",
+  "widths": [
+   640,
+   960,
+   1440,
+   1920
+  ],
+  "w": 4000,
+  "h": 2252,
+  "pos": "50% 50%",
+  "alt": "The rubble and armour-stone shoreline running alongside the quay toward the city",
+  "src": "20260907_170846.jpg"
+ },
+ "warning-sign": {
+  "role": "card",
+  "widths": [
+   400,
+   640,
+   960,
+   1440
+  ],
+  "w": 4000,
+  "h": 2252,
+  "pos": "50% 45%",
+  "alt": "A weathered wooden warning sign about the cross-channel ferry standing at the head of the pier",
+  "src": "20260907_194552.jpg"
+ },
+ "skyline-walk": {
+  "role": "wide",
+  "widths": [
+   640,
+   960,
+   1440,
+   1920
+  ],
+  "w": 4000,
+  "h": 2252,
+  "pos": "50% 55%",
+  "alt": "Looking back along the quay toward the marina and the downtown skyline",
+  "src": "20260908_171722.jpg"
+ },
+ "evening-walk": {
+  "role": "wide",
+  "widths": [
+   640,
+   960,
+   1440,
+   1920
+  ],
+  "w": 3389,
+  "h": 1905,
+  "pos": "50% 50%",
+  "alt": "Walkers heading out along the pier as the sun drops toward the horizon",
+  "src": "20260907_190251.jpg"
+ },
+ "pier-bollard": {
+  "role": "card",
+  "widths": [
+   400,
+   640,
+   960,
+   1440
+  ],
+  "w": 3000,
+  "h": 4000,
+  "pos": "50% 50%",
+  "alt": "A rusted mooring bollard set into the pier deck, with the LOVE installation and a ferry in the distance",
+  "src": "20210729_155341.jpg"
+ }
+}
