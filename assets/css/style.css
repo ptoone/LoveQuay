@@ -575,6 +575,46 @@ a { text-decoration-thickness: .07em; text-underline-offset: .18em; }
 .lq-footer ul { list-style: none; padding: 0; margin: 0; }
 .lq-footer li { margin-bottom: .55rem; }
 .lq-footer__logo { width: 190px; height: auto; margin-bottom: 1.25rem; }
+/* Social row: circular icon buttons, one per place LoveQuay lives online. */
+.lq-social {
+  display: flex; flex-wrap: wrap; gap: .6rem;
+  list-style: none; padding: 0; margin: 1.6rem 0 0;
+}
+.lq-social a {
+  width: 44px; height: 44px; border-radius: 50%;
+  display: grid; place-items: center;
+  color: rgba(255, 255, 255, .75);
+  background: rgba(255, 255, 255, .07);
+  border: 1px solid rgba(255, 255, 255, .14);
+  transition: background .2s ease, color .2s ease,
+              border-color .2s ease, transform .2s ease;
+}
+.lq-social a:hover,
+.lq-social a:focus-visible {
+  background: var(--lq-basin); color: #fff;
+  border-color: transparent; text-decoration: none;
+  transform: translateY(-2px);
+}
+.lq-social a:not(.lq-badge) svg {
+  width: 20px; height: 20px; fill: currentColor; display: block;
+}
+
+/* xyz.am ships a badge that already carries its own ring, and their brand terms
+   ask that it not be placed inside another shape. So it drops the button chrome
+   and stands on its own at the same 44px footprint — its ring lines up with the
+   other buttons' edges. Its own fill/stroke attributes are left to do the work,
+   which is why the rule above skips it. */
+.lq-social .lq-badge,
+.lq-social .lq-badge:hover,
+.lq-social .lq-badge:focus-visible { background: none; border-color: transparent; }
+/* Its ring is drawn in currentColor, so at the shared .75 it out-weighs the
+   neighbouring discs, whose borders sit at .14 over a faint fill. Dimming it
+   slightly evens out the row; still one colour, as their terms require. */
+.lq-social .lq-badge { color: rgba(255, 255, 255, .6); }
+.lq-social .lq-badge:hover,
+.lq-social .lq-badge:focus-visible { color: #fff; }
+.lq-social .lq-badge svg { width: 44px; height: 44px; display: block; }
+
 .lq-footer__bar {
   border-top: 1px solid rgba(255, 255, 255, .12);
   margin-top: 3rem; padding-top: 1.5rem;
