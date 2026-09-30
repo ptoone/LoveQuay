@@ -15,6 +15,7 @@ image set; the committed output in `assets/` is what actually ships.
 | `swim.html` | Safety in full — the four essentials, known hazards, winter swimming, the ladders |
 | `friends.html` | Friends of Love Quay: why the group exists, what it does, how to help |
 | `gallery.html` | Photo grid with a keyboard-accessible lightbox |
+| `media.html` | Video, animation and stills — generated, see below |
 | `brand.html` | The mark, lockups, colourways, clear space, palette, type, downloads |
 
 Navigation and footer are repeated in each file. There is no templating layer —
@@ -54,14 +55,29 @@ python tools/build_brand.py
 ```
 
 Writes every file in `assets/brand/` plus `favicon.ico`. The mark is defined once,
-as geometry, at the top of the script — heart path, water transform, ladder rails
-and rungs, quay bracket — so all the lockups, colourways and icons stay in exact
-agreement. Text is converted to outlines via `fontTools`, so no file depends on a
-font being installed.
+as geometry, at the top of the script — the pool, water and quay silhouettes plus
+the ladder's rails and rungs — so all the lockups, colourways and icons stay in
+exact agreement. Text is converted to outlines via `fontTools`, so no file
+depends on a font being installed.
 
 Requires `fonttools` and [Inkscape](https://inkscape.org) (for the PNG exports).
 Poppins ExtraBold is downloaded on first run. Set `INKSCAPE=/path/to/inkscape` if
 it isn't at the default Windows location.
+
+### Where the mark's curves came from
+
+`tools/logo-source.png` is the approved artwork. `tools/trace_logo.py` separated
+it into colour layers, followed each boundary, and fitted smooth cubic beziers,
+printing the path data that now lives at the top of `build_brand.py`:
+
+```bash
+python tools/trace_logo.py tools/logo-source.png
+```
+
+You only need this if the artwork itself changes. The ladder is *not* traced — it
+is drawn as strokes, so it stays crisp and can be knocked out for the one-colour
+versions. That also fixed a misregistration in the source, where the ladder's
+blue backing and its white rails were offset from each other by about 25 px.
 
 ## Regenerating the photographs
 
@@ -82,6 +98,44 @@ python tools/build_og.py
 
 Composes `assets/img/og-default.jpg`, the 1200×630 social card. Run it after the
 other two.
+
+## The Media page
+
+```bash
+python tools/build_media.py
+```
+
+```powershell
+.\tools\upload_media.ps1 -Setup      # once, to configure the rclone remote
+.\tools\upload_media.ps1             # upload
+```
+
+`media.html` is the one generated page — it is a catalogue, so it is built from
+an inventory rather than hand-written, and regenerating it keeps the listed
+sizes and durations honest. Edit the `GROUPS` table in `build_media.py` to add,
+remove or re-title an item.
+
+Only the splat group is published. `ENABLED` at the top of the script decides
+that — add `"mixes"`, `"reels"` or `"basin"` to bring the long mixes, the
+vertical reels or the raw Peter Street Basin footage back. Rebuilding also
+prunes preview files belonging to groups that are switched off, and both upload
+scripts carry matching filters. Nav and footer are lifted from
+`gallery.html` at build time so they cannot drift from the other pages.
+
+**The originals are not in this repo.** Even the six splat files come to
+1.27 GB and two are over GitHub's 100 MB per-file limit, so they live in a
+Cloudflare R2 bucket served from `media.lovequay.com`; `R2_BASE` at the top of `build_media.py` is
+the only place that URL appears. What *is* committed is one poster frame per
+item plus a small looping preview of the splat — about 3.3 MB in `media/`.
+
+`upload_media.ps1` (PowerShell, native on Windows) and `upload_media.sh` (bash)
+push the originals to R2 and carry the one-time setup notes. Run
+`.\tools\upload_media.ps1 -Setup` once to configure the rclone remote, then
+without the flag to upload; `-WhatIf` is a dry run. Both pass `--max-depth 1`,
+because the source folder has subdirectories the page does not list. They also
+mark the largest files `Content-Disposition: attachment`,
+because the HTML `download` attribute is ignored on cross-origin links and
+without it a click would try to render an 819 MB GIF in the browser.
 
 ## Notes
 
