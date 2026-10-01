@@ -320,6 +320,21 @@ a { text-decoration-thickness: .07em; text-underline-offset: .18em; }
   .photo--pano { aspect-ratio: 16 / 10; }
 }
 
+/* The map is a rotated satellite screenshot, so it carries white wedges at its
+   corners — it needs a white bed, not the warm one the photographs sit on. */
+.photo--map {
+  background: #fff;
+  border: 1px solid rgba(8, 42, 101, .1);
+  box-shadow: none;
+}
+.photo--map img { width: 100%; height: auto; display: block; }
+.photo--map a { display: block; cursor: zoom-in; }
+.photo__note {
+  padding: .8rem 1.1rem; font-size: .82rem;
+  color: var(--lq-muted); background: rgba(8, 42, 101, .03);
+  border-top: 1px solid rgba(8, 42, 101, .08);
+}
+
 /* Caption that slides up out of a gradient foot */
 .photo__cap {
   position: absolute; inset: auto 0 0 0;
@@ -522,6 +537,99 @@ a { text-decoration-thickness: .07em; text-underline-offset: .18em; }
   text-transform: uppercase; color: var(--lq-muted); margin-bottom: .5rem;
 }
 
+/* ------------------------------------------------------------- media ---- */
+
+.media-grid { display: grid; gap: 1.5rem 1.25rem; }
+.media-grid--16x9 { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+.media-grid--9x16 { grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); }
+.media-grid--poster { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
+
+.media-item {
+  display: flex; flex-direction: column;
+  background: #fff; border: 1px solid rgba(8, 42, 101, .1);
+  border-radius: var(--lq-radius); overflow: hidden;
+  transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+}
+.media-item:hover {
+  transform: translateY(-3px); box-shadow: var(--lq-shadow);
+  border-color: rgba(8, 42, 101, .18);
+}
+.section--sand .media-item { background: #fff; }
+
+.media-item__shot { position: relative; margin: 0; background: var(--lq-navy); }
+.media-item__shot--16x9 { aspect-ratio: 16 / 9; }
+.media-item__shot--9x16 { aspect-ratio: 9 / 16; }
+.media-item__shot img { width: 100%; height: 100%; object-fit: cover; display: block; }
+/* Posters come in three different crops, so show each one whole rather than
+   cutting all of them to a single shape. */
+.media-item__shot--poster { aspect-ratio: 4 / 5; background: var(--lq-sand-warm); }
+.media-item__shot--poster img { object-fit: contain; }
+
+.media-item__badge {
+  position: absolute; right: .6rem; bottom: .6rem;
+  background: rgba(5, 27, 68, .82); color: #fff;
+  font-size: .72rem; font-weight: 600; letter-spacing: .04em;
+  padding: .2rem .5rem; border-radius: 6px;
+  font-variant-numeric: tabular-nums;
+}
+
+.media-item__body {
+  padding: 1rem 1.1rem 1.1rem;
+  display: flex; flex-direction: column; flex: 1 1 auto;
+}
+.media-item__body h3 { font-size: 1rem; line-height: 1.25; margin-bottom: .35rem; }
+.media-item__meta {
+  font-size: .8rem; color: var(--lq-muted); margin: 0 0 .5rem;
+  font-variant-numeric: tabular-nums;
+}
+.media-item__note { font-size: .84rem; margin: 0 0 .75rem; }
+.media-item__body .media-item__dl { margin-top: auto; }
+
+.media-item__dl {
+  display: inline-flex; align-items: center; gap: .45rem;
+  align-self: flex-start;
+  font-family: var(--lq-display); font-weight: 600; font-size: .84rem;
+  color: var(--lq-navy); text-decoration: none;
+  background: rgba(23, 102, 215, .08);
+  border: 1px solid rgba(23, 102, 215, .2);
+  border-radius: 999px; padding: .45rem .95rem;
+  transition: background .18s ease, color .18s ease, border-color .18s ease;
+}
+.media-item__dl:hover, .media-item__dl:focus-visible {
+  background: var(--lq-basin); color: #fff; border-color: transparent;
+}
+.media-item__dl svg {
+  width: 15px; height: 15px; fill: none; stroke: currentColor;
+  stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex: none;
+}
+.media-item__dl span { font-weight: 500; opacity: .75; }
+
+/* Format list beside the splat preview */
+.media-formats { list-style: none; padding: 0; margin: 1.75rem 0 0; }
+.media-formats li {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 1rem; padding: .85rem 0;
+  border-top: 1px solid rgba(8, 42, 101, .1);
+}
+.media-formats li:last-child { border-bottom: 1px solid rgba(8, 42, 101, .1); }
+.media-formats strong {
+  display: block; font-family: var(--lq-display); font-size: .95rem;
+  color: var(--lq-navy);
+}
+.media-formats span {
+  display: block; font-size: .8rem; color: var(--lq-muted);
+  font-variant-numeric: tabular-nums;
+}
+.media-formats em { display: block; font-size: .8rem; font-style: normal; margin-top: .15rem; }
+
+.media-note { font-size: .84rem; color: var(--lq-muted); }
+
+@media (max-width: 575.98px) {
+  .media-grid--16x9, .media-grid--9x16 { grid-template-columns: repeat(2, 1fr); gap: 1rem .75rem; }
+  .media-item__body { padding: .8rem .85rem .9rem; }
+  .media-item__body h3 { font-size: .9rem; }
+}
+
 /* ----------------------------------------------------------- gallery ---- */
 
 .gallery { columns: 3; column-gap: 1rem; }
@@ -599,6 +707,9 @@ a { text-decoration-thickness: .07em; text-underline-offset: .18em; }
 /* The xyz monogram is a lighter, handwritten mark, so it carries a little
    more size to sit at the same optical weight as the solid glyphs. */
 .lq-social .is-xyz svg { width: 23px; height: 23px; }
+/* The owl is a wide, short mark — two eyes side by side — so it needs a
+   little more width to carry the same weight as the upright glyphs. */
+.lq-social .is-tripadvisor svg { width: 24px; height: 24px; }
 
 .lq-footer__bar {
   border-top: 1px solid rgba(255, 255, 255, .12);
