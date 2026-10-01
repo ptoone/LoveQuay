@@ -1,0 +1,14 @@
+# LoveQuay videos, newest first.
+#
+# One YouTube URL per line. watch?v=, youtu.be/ and /shorts/ all work.
+# Blank lines and # comments are ignored.
+#
+# Add a URL here, run `python tools/build_youtube.py`, and the title, uploader,
+# orientation and thumbnail are fetched from YouTube and baked into videos.html.
+# Nothing else to edit.
+
+https://www.youtube.com/watch?v=ugOmN5xpFbs
+https://www.youtube.com/shorts/NcVQ7KYvEiE
+https://www.youtube.com/shorts/Y8qrsNimaFk
+https://www.youtube.com/shorts/ZK3rvmpKO3o
+https://www.youtube.com/shorts/_7ra3J5BtLY
