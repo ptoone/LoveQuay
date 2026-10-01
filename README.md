@@ -15,7 +15,8 @@ image set; the committed output in `assets/` is what actually ships.
 | `swim.html` | Safety in full — the four essentials, known hazards, winter swimming, the ladders |
 | `friends.html` | Friends of Love Quay: why the group exists, what it does, how to help |
 | `gallery.html` | Photo grid with a keyboard-accessible lightbox |
-| `media.html` | Video, animation and stills — generated, see below |
+| `videos.html` | YouTube films and shorts — generated, see below |
+| `media.html` | Downloadable artwork — generated, see below |
 | `brand.html` | The mark, lockups, colourways, clear space, palette, type, downloads |
 
 Navigation and footer are repeated in each file. There is no templating layer —
@@ -98,6 +99,24 @@ python tools/build_og.py
 
 Composes `assets/img/og-default.jpg`, the 1200×630 social card. Run it after the
 other two.
+
+## The Videos page
+
+```bash
+python tools/build_youtube.py
+```
+
+Add a YouTube URL to `tools/youtube.txt`, one per line, and run that. Title,
+uploader, orientation and thumbnail come from YouTube's public oEmbed endpoint —
+no API key, no quota — and are baked into `videos.html`. `watch?v=`, `youtu.be/`
+and `/shorts/` forms all work; shorts are detected from the oEmbed dimensions
+and laid out 9:16, everything else 16:9.
+
+Nothing is embedded up front. Five YouTube iframes would pull a megabyte of
+player script and set cookies before anyone watched anything, so each video is a
+cached still with a play button, and the iframe is created on click from
+`youtube-nocookie.com`. Stills live in `media/yt/` and are pruned when a video
+is removed from the list.
 
 ## The Media page
 
