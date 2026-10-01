@@ -96,6 +96,28 @@
     });
   }
 
+  /* --- YouTube: swap the still for a player only on click --------------
+     Embedding five iframes up front would pull a megabyte of player script and
+     set cookies before anyone watched anything. */
+  document.querySelectorAll(".yt-item__play").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var id = btn.getAttribute("data-yt");
+      if (!id) return;
+      var shot = btn.querySelector(".yt-item__shot");
+      var frame = document.createElement("iframe");
+      frame.className = "yt-item__frame";
+      frame.src = "https://www.youtube-nocookie.com/embed/" + id +
+                  "?autoplay=1&rel=0&modestbranding=1";
+      frame.title = btn.getAttribute("aria-label") || "YouTube video";
+      frame.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; " +
+                    "gyroscope; picture-in-picture; web-share";
+      frame.allowFullscreen = true;
+      shot.innerHTML = "";
+      shot.appendChild(frame);
+      btn.replaceWith(shot);
+    });
+  });
+
   /* --- Close the mobile menu after tapping a link ---------------------- */
   var menu = document.getElementById("lqMenu");
   if (menu) {
