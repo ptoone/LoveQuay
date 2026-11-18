@@ -310,6 +310,54 @@ def tile(bg, basin, water, cope, rim, radius=0.1875, frac=0.74):
             f'<g transform="translate({dx:.2f},{dy:.2f})">{body}</g></svg>')
 
 
+LOVE, QUAY = (0, 1, 2, 3), (4, 5, 6, 7)
+
+
+def line(idx, x, baseline, cap, gap):
+    """One word of the sign alphabet, set on a baseline."""
+    s = cap / BASELINE
+    out, cx = "", x
+    for i in idx:
+        bx, _, bw, _ = B[i]
+        out += (f'<g transform="translate({cx:.2f},{baseline:.2f}) scale({s:.5f}) '
+                f'translate({-bx:.2f},{-BASELINE:.2f})"><path d="{GLYPH[i]}"/></g>')
+        cx += bw * s + gap
+    return out
+
+
+def line_w(idx, cap, gap):
+    return sum(B[i][2] for i in idx) * cap / BASELINE + gap * (len(idx) - 1)
+
+
+def justify(idx, target_w, cap):
+    """The letter gap that sets this word to exactly target_w. QUAY is naturally
+    wider than LOVE, so the two lines need different tracking to square up."""
+    n = len(idx) - 1
+    return (target_w - sum(B[i][2] for i in idx) * cap / BASELINE) / n
+
+
+def word_tile(bg, fill, radius=0.1875, inner=0.78, lead=0.20):
+    """LOVE over QUAY, both justified to the same width, in a square.
+
+    The wordmark on one line is far too wide for an icon. Stacked and justified
+    it fills a square properly, and it is the only lettering we have — the sign
+    alphabet stops at these eight characters."""
+    N = 512.0
+    w = N * inner
+    cap = w * 0.405
+    g1, g2 = justify(LOVE, w, cap), justify(QUAY, w, cap)
+    desc = (B[4][3] - BASELINE) * cap / BASELINE      # the Q's tail
+    block = cap + cap * lead + cap + desc             # total ink, top to tail
+    x = (N - w) / 2
+    top = (N - block) / 2
+    body = (line(LOVE, x, top + cap, cap, g1)
+            + line(QUAY, x, top + cap + cap * lead + cap, cap, g2))
+    return (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" '
+            f'width="512" height="512" role="img" aria-label="LoveQuay">'
+            f'<rect width="512" height="512" rx="{N * radius:.0f}" fill="{bg}"/>'
+            f'<g fill="{fill}" fill-rule="evenodd">{body}</g></svg>')
+
+
 def ico():
     """favicon.ico, for the browsers and crawlers that still ask for it."""
     try:
@@ -375,6 +423,10 @@ def main():
     print("icons")
     write("favicon.svg", tile(NAVY, NAVY_LT, WATER_LT, "#061E4A", NAVY))
     write("tile-white.svg", tile(WHITE, BASIN, WATER, NAVY, WHITE))
+    write("tile-word-navy.svg", word_tile(NAVY, WHITE))
+    write("tile-word-red.svg", word_tile(SIGN, WHITE))
+    write("tile-word-white.svg", word_tile(WHITE, SIGN))
+    write("tile-word-blue.svg", word_tile(BASIN, WHITE))
 
     if want_png:
         print("png")
@@ -390,6 +442,10 @@ def main():
         png("favicon.svg", "icon-192.png", 192)
         png("favicon.svg", "icon-512.png", 512)
         png("tile-white.svg", "tile-white-512.png", 512)
+        for n in ("tile-word-navy", "tile-word-red", "tile-word-white", "tile-word-blue"):
+            png(f"{n}.svg", f"{n}-512.png", 512)
+        for s in (180, 64, 32, 16):
+            png("tile-word-navy.svg", f"tile-word-navy-{s}.png", s)
         png("wordmark.svg", "wordmark-1200.png", 1200)
         ico()
     else:
