@@ -158,6 +158,22 @@ PHOTOS = {
     "pylons": ("pylons20261008_175833.jpg", "card", "50% 55%",
                "Two orange traffic cones set over a broken patch of the pier path, "
                "the lake on one side and overgrowth on the other"),
+
+    # Hero bands for the four Media sub-pages. Same sources as some of the card
+    # slugs above, re-exported wide: the card widths top out at 1440 and stop
+    # short of a full-bleed band on a large screen.
+    "hero-photos": ("cap_20261031_153416_alex_and_steve_jump_trim_short_00.00.02_21.jpg",
+                    "wide", "50% 45%",
+                    "Two swimmers leaping together from the edge of the pier into the water"),
+    "hero-videos": ("20260926_181250.jpg", "wide", "50% 50%",
+                    "People on the pier at dusk with recording equipment and a paddleboard "
+                    "laid out along the deck"),
+    "hero-files": ("20260928_115346.jpg", "wide", "50% 45%",
+                   "A large group gathered on the pier around their equipment, the Toronto "
+                   "skyline across the water"),
+    "hero-brand": ("20261002_114021.jpg", "wide", "72% 50%",
+                   "The weathered white LOVE sign with its red letters at the east end of "
+                   "the pier, the lettering the wordmark is traced from"),
 }
 
 # GIF clips converted to video, which is an order of magnitude smaller.

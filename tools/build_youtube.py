@@ -78,14 +78,44 @@ def read_list():
 
 
 def chrome():
-    """Nav and footer, lifted from gallery.html so every page stays identical."""
+    """Nav, tab bar and footer, lifted from gallery.html so the four Media pages
+    stay identical. The tab bar was being dropped on every rebuild before this:
+    the template simply did not know it existed."""
     src = open(os.path.join(ROOT, "gallery.html"), encoding="utf-8").read()
     nav = re.search(r'<nav class="lq-nav.*?</nav>', src, re.S).group(0)
-    nav = nav.replace(' aria-current="page"', "")
-    nav = nav.replace('<a class="nav-link" href="videos.html">',
-                      '<a class="nav-link" aria-current="page" href="videos.html">')
+    sub = re.search(r'<nav class="subnav".*?</nav>', src, re.S).group(0)
+    sub = sub.replace(' aria-current="page"', "")
+    sub = sub.replace('<a href="videos.html"', '<a href="videos.html" aria-current="page"')
     foot = re.search(r'<footer class="lq-footer">.*?</footer>', src, re.S).group(0)
-    return nav, foot
+    return nav, sub, foot
+
+def hero(slug, eyebrow, h1, lead):
+    """The hero band, built from the image manifest so it matches the other
+    Media pages exactly. It lives here because this page is generated:
+    hand-editing the output only survives until the next rebuild."""
+    man = json.load(open(os.path.join(ROOT, "assets", "img", "manifest.json"),
+                         encoding="utf-8"))
+    m = man[slug]
+    web = ", ".join(f"assets/img/{slug}-{w}.webp {w}w" for w in m["widths"])
+    jpg = ", ".join(f"assets/img/{slug}-{w}.jpg {w}w" for w in m["widths"])
+    return f"""<header class="hero hero--band">
+  <div class="hero__media">
+    <picture>
+      <source type="image/webp" srcset="{web}" sizes="100vw">
+      <img src="assets/img/{slug}-1440.jpg" srcset="{jpg}" sizes="100vw" alt="{m['alt']}" width="{m['w']}" height="{m['h']}" fetchpriority="high" decoding="async" style="object-position:{m['pos']}">
+    </picture>
+  </div>
+  <div class="hero__scrim"></div>
+  <div class="container hero__inner">
+    <div class="row">
+      <div class="col-lg-8">
+        <p class="eyebrow eyebrow--light">{eyebrow}</p>
+        <h1>{h1}</h1>
+        <p class="mt-3">{lead}</p>
+      </div>
+    </div>
+  </div>
+</header>"""
 
 
 def card(v):
@@ -115,7 +145,7 @@ def card(v):
 
 
 def build(videos):
-    nav, foot = chrome()
+    nav, sub, foot = chrome()
     channels = sorted({v["author"] for v in videos})
     by = (" and ".join(channels) if len(channels) < 3
           else ", ".join(channels[:-1]) + " and " + channels[-1])
@@ -171,19 +201,17 @@ def build(videos):
 
 <main id="main">
 
+{hero('hero-videos', 'Media', 'Film from the pier.',
+      f'{len(videos)} clips, {n_short} of them shorts, from {by} &mdash; swimming, '
+      'safety drills, paddleboarding, and the occasional lecture delivered '
+      'waist-deep in the lake.')}
+{sub}
+
 <section class="section section--tight">
   <div class="container">
-    <div class="row g-5 align-items-end">
+    <div class="row">
       <div class="col-lg-7">
-        <p class="eyebrow">Videos</p>
-        <div class="rule"></div>
-        <h1>Film from the pier.</h1>
-        <p class="lead-lg mt-4">{len(videos)} clips, {n_short} of them shorts, from {by}.
-          Swimming, safety drills, paddleboarding, and the occasional lecture delivered
-          waist-deep in the lake.</p>
-      </div>
-      <div class="col-lg-5">
-        <div class="notice">
+        <div class="notice mb-0">
           <h3>Nothing loads until you press play</h3>
           <p>These are stills, not embeds. YouTube is only contacted — and only sets a
             cookie — once you choose to watch something.</p>

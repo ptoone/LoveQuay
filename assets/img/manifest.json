@@ -544,5 +544,61 @@
   "pos": "50% 55%",
   "alt": "Two orange traffic cones set over a broken patch of the pier path, the lake on one side and overgrowth on the other",
   "src": "pylons20261008_175833.jpg"
+ },
+ "hero-photos": {
+  "role": "wide",
+  "widths": [
+   640,
+   960,
+   1440,
+   1920
+  ],
+  "w": 3840,
+  "h": 2160,
+  "pos": "50% 45%",
+  "alt": "Two swimmers leaping together from the edge of the pier into the water",
+  "src": "cap_20261031_153416_alex_and_steve_jump_trim_short_00.00.02_21.jpg"
+ },
+ "hero-videos": {
+  "role": "wide",
+  "widths": [
+   640,
+   960,
+   1440,
+   1920
+  ],
+  "w": 4000,
+  "h": 2252,
+  "pos": "50% 50%",
+  "alt": "People on the pier at dusk with recording equipment and a paddleboard laid out along the deck",
+  "src": "20260926_181250.jpg"
+ },
+ "hero-files": {
+  "role": "wide",
+  "widths": [
+   640,
+   960,
+   1440,
+   1920
+  ],
+  "w": 4000,
+  "h": 2252,
+  "pos": "50% 45%",
+  "alt": "A large group gathered on the pier around their equipment, the Toronto skyline across the water",
+  "src": "20260928_115346.jpg"
+ },
+ "hero-brand": {
+  "role": "wide",
+  "widths": [
+   640,
+   960,
+   1440,
+   1920
+  ],
+  "w": 4000,
+  "h": 3000,
+  "pos": "72% 50%",
+  "alt": "The weathered white LOVE sign with its red letters at the east end of the pier, the lettering the wordmark is traced from",
+  "src": "20261002_114021.jpg"
  }
 }

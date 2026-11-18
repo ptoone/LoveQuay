@@ -812,3 +812,61 @@ a { text-decoration-thickness: .07em; text-underline-offset: .18em; }
 @media (max-width: 575.98px) {
   .row.g-5, .row.gx-5 { --bs-gutter-x: 1.5rem; }
 }
+
+/* --------------------------------------------------------------------------
+   Media sub-pages
+   Photos, Videos, Files and Brand are four separate pages under one Media
+   heading. The tab bar is the only thing that tells you so — it sits directly
+   under the hero on all four and marks the current one with aria-current.
+   -------------------------------------------------------------------------- */
+.hero--band {
+  min-height: min(52vh, 500px);
+  padding: calc(var(--lq-nav-h) + 2.25rem) 0 clamp(2rem, 4vw, 3.25rem);
+}
+/* The full-height hero's scrim is tuned for 900px of photograph. Compressed
+   into a 500px band it swallows the picture whole, so the band gets its own:
+   a hard wash on the left where the type sits, and the right side left alone. */
+.hero--band .hero__scrim {
+  background:
+    linear-gradient(180deg, rgba(5, 27, 68, .40) 0%, rgba(5, 27, 68, .08) 46%,
+                            rgba(5, 27, 68, .52) 100%),
+    linear-gradient(90deg, rgba(5, 27, 68, .80) 0%, rgba(5, 27, 68, .34) 44%,
+                           rgba(5, 27, 68, 0) 74%);
+}
+.hero--band h1 { font-size: clamp(2rem, 4.2vw, 3.1rem); }
+.hero--band .hero__media img { animation-duration: 40s; }
+
+.subnav {
+  background: var(--lq-navy);
+  border-top: 1px solid rgba(255, 255, 255, .10);
+  position: sticky; top: var(--lq-nav-h); z-index: 20;
+}
+.subnav__list {
+  display: flex; gap: .25rem; margin: 0; padding: 0; list-style: none;
+  overflow-x: auto; scrollbar-width: none;
+}
+.subnav__list::-webkit-scrollbar { display: none; }
+.subnav__list a {
+  display: block; white-space: nowrap;
+  padding: .95rem 1.15rem .85rem;
+  font-family: var(--lq-display); font-weight: 600; font-size: .95rem;
+  letter-spacing: .01em; text-decoration: none;
+  color: rgba(255, 255, 255, .62);
+  border-bottom: 3px solid transparent;
+  transition: color .18s ease, border-color .18s ease, background .18s ease;
+}
+.subnav__list a:hover,
+.subnav__list a:focus-visible { color: #fff; background: rgba(255, 255, 255, .06); }
+.subnav__list a[aria-current="page"] {
+  color: #fff; border-bottom-color: var(--lq-water);
+}
+.subnav__label {
+  display: none; align-self: center;
+  margin-right: .9rem; padding-right: .9rem;
+  border-right: 1px solid rgba(255, 255, 255, .16);
+  color: rgba(255, 255, 255, .45);
+  font-family: var(--lq-display); font-weight: 600;
+  font-size: .72rem; letter-spacing: .16em; text-transform: uppercase;
+}
+@media (min-width: 768px) { .subnav__label { display: block; } }
+@media (prefers-reduced-motion: reduce) { .subnav__list a { transition: none; } }

@@ -185,6 +185,9 @@ def slug(name):
     return re.sub(r"[^a-z0-9]+", "-", os.path.splitext(name)[0].lower()).strip("-")
 
 
+MADE = set()          # previews written during this run; the prune trusts nothing else
+
+
 def poster(src, stem, width=640):
     """One representative frame as WebP + JPEG. Alpha lands on navy."""
     tmp = os.path.join(OUT, "_frame.png")
@@ -205,6 +208,7 @@ def poster(src, stem, width=640):
     im.thumbnail((width, width * 3), Image.LANCZOS)
     im.save(os.path.join(OUT, stem + ".webp"), quality=78, method=6)
     im.save(os.path.join(OUT, stem + ".jpg"), quality=78, progressive=True, optimize=True)
+    MADE.update({stem + ".webp", stem + ".jpg"})
     if os.path.exists(tmp):
         os.remove(tmp)
     return True
@@ -231,14 +235,44 @@ def esc(s):
 # --- page ------------------------------------------------------------------
 
 def chrome():
-    """Nav and footer, taken from gallery.html so every page stays identical."""
+    """Nav, tab bar and footer, lifted from gallery.html so the four Media pages
+    stay identical. The tab bar was being dropped on every rebuild before this:
+    the template simply did not know it existed."""
     src = open(os.path.join(ROOT, "gallery.html"), encoding="utf-8").read()
     nav = re.search(r'<nav class="lq-nav.*?</nav>', src, re.S).group(0)
-    nav = nav.replace(' aria-current="page"', "")
-    nav = nav.replace('<a class="nav-link" href="media.html">',
-                      '<a class="nav-link" aria-current="page" href="media.html">')
+    sub = re.search(r'<nav class="subnav".*?</nav>', src, re.S).group(0)
+    sub = sub.replace(' aria-current="page"', "")
+    sub = sub.replace('<a href="media.html"', '<a href="media.html" aria-current="page"')
     foot = re.search(r'<footer class="lq-footer">.*?</footer>', src, re.S).group(0)
-    return nav, foot
+    return nav, sub, foot
+
+def hero(slug, eyebrow, h1, lead):
+    """The hero band, built from the image manifest so it matches the other
+    Media pages exactly. It lives here because this page is generated:
+    hand-editing the output only survives until the next rebuild."""
+    man = json.load(open(os.path.join(ROOT, "assets", "img", "manifest.json"),
+                         encoding="utf-8"))
+    m = man[slug]
+    web = ", ".join(f"assets/img/{slug}-{w}.webp {w}w" for w in m["widths"])
+    jpg = ", ".join(f"assets/img/{slug}-{w}.jpg {w}w" for w in m["widths"])
+    return f"""<header class="hero hero--band">
+  <div class="hero__media">
+    <picture>
+      <source type="image/webp" srcset="{web}" sizes="100vw">
+      <img src="assets/img/{slug}-1440.jpg" srcset="{jpg}" sizes="100vw" alt="{m['alt']}" width="{m['w']}" height="{m['h']}" fetchpriority="high" decoding="async" style="object-position:{m['pos']}">
+    </picture>
+  </div>
+  <div class="hero__scrim"></div>
+  <div class="container hero__inner">
+    <div class="row">
+      <div class="col-lg-8">
+        <p class="eyebrow eyebrow--light">{eyebrow}</p>
+        <h1>{h1}</h1>
+        <p class="mt-3">{lead}</p>
+      </div>
+    </div>
+  </div>
+</header>"""
 
 
 def card(item, aspect):
@@ -272,7 +306,7 @@ def card(item, aspect):
 
 
 def build_page(groups, total_bytes, total_files):
-    nav, foot = chrome()
+    nav, sub, foot = chrome()
     ids = {g[0] for g in groups}
     big = total_bytes > 5e8
     notice_head = "Some of these are large" if big else "Everything here is free"
@@ -384,19 +418,16 @@ def build_page(groups, total_bytes, total_files):
 
 <main id="main">
 
+{hero('hero-files', 'Media', 'Take any of it.', lead)}
+{sub}
+
 <section class="section section--tight">
   <div class="container">
-    <div class="row g-5 align-items-end">
+    <div class="row">
       <div class="col-lg-7">
-        <p class="eyebrow">Media</p>
-        <div class="rule"></div>
-        <h1>Take any of it.</h1>
-        <p class="lead-lg mt-4">{lead}</p>
-      </div>
-      <div class="col-lg-5">
-        <div class="notice">
+        <div class="notice mb-0">
           <h3>{notice_head}</h3>
-          <p>{notice_body}</p>
+          <p class="mb-0">{notice_body}</p>
         </div>
       </div>
     </div>
@@ -460,15 +491,27 @@ def main():
     # Drop previews belonging to groups that are switched off, so assets/media
     # never accumulates posters for things the page no longer shows.
     keep = {"splat-preview.mp4", "splat-preview.webp", "splat-preview.jpg"}
+    # Every enabled group's previews are kept, the splat group included. It was
+    # skipped here on the grounds that it renders a format list rather than
+    # poster cards — but its previews are still generated each run, so skipping
+    # it meant building them and then deleting them again, taking four committed
+    # files with it every time.
     for gid, _, _, _, items in built:
-        if gid == "splat":
-            continue        # that group renders a format list, not poster cards
         for i in items:
             keep.update({i["stem"] + ".webp", i["stem"] + ".jpg"})
+    # Only ever remove a preview this script made in this run. It used to delete
+    # anything in media/ that was not in `keep`, which quietly swept away ten
+    # files that had been uploaded by hand — they belong to the splat group,
+    # which is skipped above, so they were never in `keep` to begin with.
     for f in os.listdir(OUT):
-        if f not in keep:
-            os.remove(os.path.join(OUT, f))
+        p = os.path.join(OUT, f)
+        if f in keep or not os.path.isfile(p):
+            continue
+        if f in MADE:
+            os.remove(p)
             print("   pruned:", f)
+        else:
+            print("   left alone (not generated here):", f)
 
     with open(os.path.join(ROOT, "media.html"), "w", encoding="utf-8") as f:
         f.write(build_page(built, total, count))
