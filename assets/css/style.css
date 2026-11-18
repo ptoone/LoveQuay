@@ -925,3 +925,17 @@ a { text-decoration-thickness: .07em; text-underline-offset: .18em; }
   width: 100%; max-width: 30rem; border-radius: var(--lq-radius);
   background: #000; aspect-ratio: 4 / 3; object-fit: cover;
 }
+
+/* --------------------------------------------------------------------------
+   White cards on the navy band
+   .section--navy paints its text white and .card-lq paints its background
+   white, so a card dropped onto the navy band rendered white on white and
+   disappeared. Put the text back to ink inside the card, wherever it lands.
+   -------------------------------------------------------------------------- */
+.section--navy .card-lq { color: var(--lq-ink); }
+.section--navy .card-lq h3 { color: var(--lq-navy); }
+.section--navy .card-lq .lead-lg { color: var(--lq-muted); }
+.section--navy .card-lq .safety-list strong { color: var(--lq-navy); }
+.section--navy .card-lq .safety-list li::before { border-color: var(--lq-blue); }
+.section--navy .card-lq .safety-list li::after { background: var(--lq-blue); }
+.section--navy .card-lq a:not(.btn) { color: var(--lq-blue); }

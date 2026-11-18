@@ -227,6 +227,29 @@ def build(videos):
   </div>
 </section>
 
+<!-- Several of these titles say "hydraulophone" and nothing on the page used to
+     say what one is. -->
+<section class="section section--sand">
+  <div class="container">
+    <div class="row g-5">
+      <div class="col-lg-5">
+        <p class="eyebrow">If you were wondering</p>
+        <div class="rule"></div>
+        <h2>What is a hydraulophone?</h2>
+      </div>
+      <div class="col-lg-7">
+        <p class="lead-lg">A musical instrument played on water. It looks like a pipe with a row
+          of small fountains along it, and each fountain is a note.</p>
+        <p>You cover the jets with your fingers the way you would cover the holes of a flute. A jet
+          left running is silent; block it and the water is pushed back through a mechanism tuned
+          to that note. The sound starts in the water itself, which is why it turns up here rather
+          a lot. It was invented by Steve Mann, who also co-wrote the LoveQuay anthem.</p>
+        <p class="mb-0"><a href="https://hydraulophone.xyz.am" target="_blank" rel="noopener noreferrer">Play one in your browser</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
 </main>
 
 {foot}
