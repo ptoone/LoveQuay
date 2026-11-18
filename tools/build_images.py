@@ -105,6 +105,59 @@ PHOTOS = {
     "pier-bollard": ("20210729_155341.jpg", "card", "50% 50%",
                      "A rusted mooring bollard set into the pier deck, with the "
                      "LOVE installation and a ferry in the distance"),
+
+    # --- added 2026-11-18 -------------------------------------------------
+    "jump-pair": ("cap_20261031_153416_alex_and_steve_jump_trim_short_00.00.02_21.jpg",
+                  "card", "50% 50%",
+                  "Two swimmers leaping together from the edge of the pier into "
+                  "the water, the photographer's shadow across the deck"),
+    "dive-south": ("cap_20260926_165353_steve_and_sublime_jump_south_00.00.17_01.jpg",
+                   "card", "50% 50%",
+                   "A swimmer diving head first off the side of the pier, the deck "
+                   "running back east toward the skyline"),
+    "dive-watchers": ("LoveQuay2026oct03_5-f003783.jpg", "card", "50% 50%",
+                      "A swimmer jumping from the pier into sunlit water while "
+                      "others watch from the deck, one of them in a wheelchair"),
+    "swim-thumbs-up": ("LoveQuay2026oct03_5-f000206.jpg", "card", "50% 40%",
+                       "A swimmer in a pink cap and sunglasses giving two thumbs up "
+                       "on the deck, other swimmers and the skyline behind"),
+    "love-sign-pair": ("20261002_114021.jpg", "card", "50% 50%",
+                       "Two people in sunglasses in front of the weathered white "
+                       "LOVE sign with its red letters, the harbour beyond"),
+    "vr-group": ("20261030_153646(0).jpg", "card", "50% 45%",
+                 "A group wearing virtual reality headsets crouched in front of "
+                 "the LOVE sign under a clear sky"),
+    "vr-deck": ("D5D6C3BE-7941-481D-82E7-23C6A3D5EF73.png", "card", "50% 50%",
+                "A swimmer wearing a virtual reality headset standing with arms "
+                "outstretched beside a painted post on the pier"),
+    "crew-portrait": ("20260928_115346.jpg", "card", "50% 45%",
+                      "A large group gathered on the pier around their equipment, "
+                      "the Toronto skyline and CN Tower across the water"),
+    "deck-session": ("20260926_181250.jpg", "card", "50% 50%",
+                     "People on the pier at dusk with recording equipment and a "
+                     "paddleboard laid out along the deck"),
+
+    # Originally uploaded straight to the repo as full-size files, and served
+    # that way. Routed through the pipeline so they get responsive variants.
+    "jump-run-off": ("jump3_end_cap_20260917_193158_LoveQuay_running_off_end_00.00.145_0123.jpg",
+                     "card", "50% 50%",
+                     "Three people running off the end of the pier into the lake, "
+                     "the far shore low on the horizon"),
+    "jump-dive-pair": ("jump2_cap_LoveQuay20260915_180838_00.01.54_01.jpg",
+                       "card", "50% 50%",
+                       "One swimmer entering the water head first while another "
+                       "stands on the edge about to follow"),
+    "jump-side": ("jump3_side_LoveQuay2026oct03_5-f000745.jpg", "card", "50% 50%",
+                  "Two swimmers on the pier edge as a third dives into the water, "
+                  "the CN Tower and skyline behind"),
+    # Shot on a long lens looking EAST back along the pier toward the LOVE sign.
+    # It was published with pier-length's alt text, which described the opposite view.
+    "pier-telephoto": ("telelove20260917_153747.jpg", "card", "50% 50%",
+                       "A long-lens view back east along the pier, its line of "
+                       "mooring bollards receding toward the LOVE sign"),
+    "pylons": ("pylons20261008_175833.jpg", "card", "50% 55%",
+               "Two orange traffic cones set over a broken patch of the pier path, "
+               "the lake on one side and overgrowth on the other"),
 }
 
 # GIF clips converted to video, which is an order of magnitude smaller.

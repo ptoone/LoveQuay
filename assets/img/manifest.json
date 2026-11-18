@@ -321,6 +321,20 @@
   "alt": "Walkers heading out along the pier as the sun drops toward the horizon",
   "src": "20260907_190251.jpg"
  },
+ "swim-map": {
+  "role": "hero",
+  "widths": [
+   960,
+   1440,
+   1920,
+   2344
+  ],
+  "w": 2344,
+  "h": 1094,
+  "pos": "50% 50%",
+  "alt": "Satellite map of LoveQuay. A red arrow marks the roughly 150-metre stretch along the quay's outer face where most people swim. Labels warn that boats enter and leave through gaps in the marina wall to the north-west, and to stay out of the Western Channel to the south.",
+  "src": "LoveQuay_swim_spot_map.jpg"
+ },
  "pier-bollard": {
   "role": "card",
   "widths": [
@@ -334,5 +348,201 @@
   "pos": "50% 50%",
   "alt": "A rusted mooring bollard set into the pier deck, with the LOVE installation and a ferry in the distance",
   "src": "20210729_155341.jpg"
+ },
+ "jump-pair": {
+  "role": "card",
+  "widths": [
+   400,
+   640,
+   960,
+   1440
+  ],
+  "w": 3840,
+  "h": 2160,
+  "pos": "50% 50%",
+  "alt": "Two swimmers leaping together from the edge of the pier into the water, the photographer's shadow across the deck",
+  "src": "cap_20261031_153416_alex_and_steve_jump_trim_short_00.00.02_21.jpg"
+ },
+ "dive-south": {
+  "role": "card",
+  "widths": [
+   400,
+   640,
+   960,
+   1440
+  ],
+  "w": 3840,
+  "h": 2160,
+  "pos": "50% 50%",
+  "alt": "A swimmer diving head first off the side of the pier, the deck running back east toward the skyline",
+  "src": "cap_20260926_165353_steve_and_sublime_jump_south_00.00.17_01.jpg"
+ },
+ "dive-watchers": {
+  "role": "card",
+  "widths": [
+   400,
+   640,
+   960,
+   1440
+  ],
+  "w": 3840,
+  "h": 2160,
+  "pos": "50% 50%",
+  "alt": "A swimmer jumping from the pier into sunlit water while others watch from the deck, one of them in a wheelchair",
+  "src": "LoveQuay2026oct03_5-f003783.jpg"
+ },
+ "swim-thumbs-up": {
+  "role": "card",
+  "widths": [
+   400,
+   640,
+   960,
+   1440
+  ],
+  "w": 3840,
+  "h": 2160,
+  "pos": "50% 40%",
+  "alt": "A swimmer in a pink cap and sunglasses giving two thumbs up on the deck, other swimmers and the skyline behind",
+  "src": "LoveQuay2026oct03_5-f000206.jpg"
+ },
+ "love-sign-pair": {
+  "role": "card",
+  "widths": [
+   400,
+   640,
+   960,
+   1440
+  ],
+  "w": 4000,
+  "h": 3000,
+  "pos": "50% 50%",
+  "alt": "Two people in sunglasses in front of the weathered white LOVE sign with its red letters, the harbour beyond",
+  "src": "20261002_114021.jpg"
+ },
+ "vr-group": {
+  "role": "card",
+  "widths": [
+   400,
+   640,
+   960,
+   1440
+  ],
+  "w": 3693,
+  "h": 2252,
+  "pos": "50% 45%",
+  "alt": "A group wearing virtual reality headsets crouched in front of the LOVE sign under a clear sky",
+  "src": "20261030_153646(0).jpg"
+ },
+ "vr-deck": {
+  "role": "card",
+  "widths": [
+   400,
+   640,
+   960,
+   1440
+  ],
+  "w": 1866,
+  "h": 1050,
+  "pos": "50% 50%",
+  "alt": "A swimmer wearing a virtual reality headset standing with arms outstretched beside a painted post on the pier",
+  "src": "D5D6C3BE-7941-481D-82E7-23C6A3D5EF73.png"
+ },
+ "crew-portrait": {
+  "role": "card",
+  "widths": [
+   400,
+   640,
+   960,
+   1440
+  ],
+  "w": 4000,
+  "h": 2252,
+  "pos": "50% 45%",
+  "alt": "A large group gathered on the pier around their equipment, the Toronto skyline and CN Tower across the water",
+  "src": "20260928_115346.jpg"
+ },
+ "deck-session": {
+  "role": "card",
+  "widths": [
+   400,
+   640,
+   960,
+   1440
+  ],
+  "w": 4000,
+  "h": 2252,
+  "pos": "50% 50%",
+  "alt": "People on the pier at dusk with recording equipment and a paddleboard laid out along the deck",
+  "src": "20260926_181250.jpg"
+ },
+ "jump-run-off": {
+  "role": "card",
+  "widths": [
+   400,
+   640,
+   960,
+   1440
+  ],
+  "w": 3840,
+  "h": 2160,
+  "pos": "50% 50%",
+  "alt": "Three people running off the end of the pier into the lake, the far shore low on the horizon",
+  "src": "jump3_end_cap_20260917_193158_LoveQuay_running_off_end_00.00.145_0123.jpg"
+ },
+ "jump-dive-pair": {
+  "role": "card",
+  "widths": [
+   400,
+   640,
+   960,
+   1440
+  ],
+  "w": 3840,
+  "h": 2160,
+  "pos": "50% 50%",
+  "alt": "One swimmer entering the water head first while another stands on the edge about to follow",
+  "src": "jump2_cap_LoveQuay20260915_180838_00.01.54_01.jpg"
+ },
+ "jump-side": {
+  "role": "card",
+  "widths": [
+   400,
+   640,
+   960,
+   1440
+  ],
+  "w": 3840,
+  "h": 2160,
+  "pos": "50% 50%",
+  "alt": "Two swimmers on the pier edge as a third dives into the water, the CN Tower and skyline behind",
+  "src": "jump3_side_LoveQuay2026oct03_5-f000745.jpg"
+ },
+ "pier-telephoto": {
+  "role": "card",
+  "widths": [
+   400,
+   640,
+   960,
+   1440
+  ],
+  "w": 4000,
+  "h": 2252,
+  "pos": "50% 50%",
+  "alt": "A long-lens view back east along the pier, its line of mooring bollards receding toward the LOVE sign",
+  "src": "telelove20260917_153747.jpg"
+ },
+ "pylons": {
+  "role": "card",
+  "widths": [
+   400,
+   640,
+   960,
+   1440
+  ],
+  "w": 4000,
+  "h": 2252,
+  "pos": "50% 55%",
+  "alt": "Two orange traffic cones set over a broken patch of the pier path, the lake on one side and overgrowth on the other",
+  "src": "pylons20261008_175833.jpg"
  }
 }
