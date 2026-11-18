@@ -57,9 +57,14 @@ COPE = 0.075          # coping offset, down
 COPE_DX = 0.020       # coping offset, right
 RIM = 0.42            # the white sliver between coping and basin, as a share of the offset
 LAD_CX, LAD_W = 0.635, 0.24
-LAD_TOP, LAD_BOT = -0.05, 0.40
+LAD_TOP, LAD_BOT = -0.05, 0.42
 LAD_STROKE = 0.055
-RUNGS = (0.16, 0.52, 0.88)
+# Rung positions along the rails. The first one has to clear the heart's crown:
+# the right lobe peaks at y/h = 0.000 between the rails, and a rung whose white
+# band started just below that sliced a hairline crescent off the top and left
+# it stranded above the rung. At 0.30 the band starts near 0.07, so the rung
+# sits at the waterline with the rails rising out of it.
+RUNGS = (0.30, 0.60, 0.90)
 
 
 def heart(x, y, w, h, fill):
