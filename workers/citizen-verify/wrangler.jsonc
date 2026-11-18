@@ -1,0 +1,34 @@
+{
+  "name": "lovequay-citizen-verify",
+  "main": "src/index.js",
+  "compatibility_date": "2026-11-18",
+  "upload_source_maps": true,
+
+  // WHMCS_IDENTIFIER, WHMCS_SECRET and WHMCS_API_URL are secrets and are set
+  // with `wrangler secret put`. They must never appear in this file.
+
+  // card:<8 chars> -> { "serviceid": 1234 }
+  // Written when a card is issued. Holds no name, no email, no address.
+  "kv_namespaces": [
+    { "binding": "CARDS", "id": "REPLACE_WITH_KV_ID" }
+  ],
+
+  // Per-IP. The limit is approximate and applies per Cloudflare location,
+  // which is fine here — it exists to blunt scripted scanning, not to be exact.
+  "ratelimits": [
+    {
+      "name": "VERIFY_LIMIT",
+      "namespace_id": "1",
+      "simple": { "limit": 30, "period": 60 }
+    }
+  ],
+
+  "observability": {
+    "enabled": true,
+    "logs": { "head_sampling_rate": 1 }
+  },
+
+  "routes": [
+    { "pattern": "api.lovequay.com/v1/*", "custom_domain": false, "zone_name": "lovequay.com" }
+  ]
+}

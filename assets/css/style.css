@@ -870,3 +870,58 @@ a { text-decoration-thickness: .07em; text-underline-offset: .18em; }
 }
 @media (min-width: 768px) { .subnav__label { display: block; } }
 @media (prefers-reduced-motion: reduce) { .subnav__list a { transition: none; } }
+
+/* --------------------------------------------------------------------------
+   Citizen card verification
+   The four results have to be told apart at a glance by someone standing on a
+   pier holding a phone, so each gets its own colour and its own icon. The grey
+   one matters most: "cannot reach the service" must never look like "this card
+   is fake".
+   -------------------------------------------------------------------------- */
+.verify-form { max-width: 34rem; }
+.verify-input {
+  font-family: var(--lq-display); font-weight: 700;
+  font-size: clamp(1.3rem, 3.4vw, 1.9rem);
+  letter-spacing: .12em; text-transform: uppercase;
+  padding: .85rem 1rem; width: 100%;
+  border: 2px solid rgba(8, 42, 101, .22); border-radius: var(--lq-radius-sm);
+  background: #fff; color: var(--lq-navy);
+}
+.verify-input:focus {
+  outline: none; border-color: var(--lq-blue);
+  box-shadow: 0 0 0 4px rgba(0, 86, 184, .14);
+}
+.verify-input.is-bad { border-color: var(--lq-red); }
+.verify-hint { font-size: .9rem; color: var(--lq-muted); margin-top: .5rem; }
+.verify-hint.is-bad { color: var(--lq-red); }
+
+.verify-result {
+  border-radius: var(--lq-radius); padding: 1.5rem 1.6rem;
+  border-left: 6px solid var(--lq-muted); background: #F2F4F7;
+  display: none;
+}
+.verify-result.is-shown { display: block; }
+.verify-result__head {
+  font-family: var(--lq-display); font-weight: 700;
+  font-size: 1.35rem; margin: 0 0 .4rem; display: flex; align-items: center; gap: .6rem;
+}
+.verify-result__id {
+  font-family: var(--lq-display); letter-spacing: .1em;
+  font-size: 1rem; color: var(--lq-muted); margin: .6rem 0 0;
+}
+.verify-result p { margin: 0; }
+.verify-result--active   { background: #E8F6ED; border-left-color: #1C8C4B; }
+.verify-result--active   .verify-result__head { color: #15693a; }
+.verify-result--inactive { background: #FFF4E5; border-left-color: #C77700; }
+.verify-result--inactive .verify-result__head { color: #8A5300; }
+.verify-result--unknown  { background: #FDECEE; border-left-color: var(--lq-red); }
+.verify-result--unknown  .verify-result__head { color: var(--lq-red); }
+.verify-result--unsure   { background: #EEF1F5; border-left-color: #5A6A80; }
+.verify-result--unsure   .verify-result__head { color: #3C4A5E; }
+
+#lqScanWrap { display: none; margin-top: 1.25rem; }
+#lqScanWrap.is-shown { display: block; }
+#lqScanVideo {
+  width: 100%; max-width: 30rem; border-radius: var(--lq-radius);
+  background: #000; aspect-ratio: 4 / 3; object-fit: cover;
+}
