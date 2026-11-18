@@ -1,0 +1,13 @@
+# Serve binaries byte-for-byte; never let line-ending conversion touch them.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.mp4 binary
+*.ico binary
+*.ttf binary
+*.svg text eol=lf
+*.html text eol=lf
+*.css text eol=lf
+*.js text eol=lf
+*.md text eol=lf

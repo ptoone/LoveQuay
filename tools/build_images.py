@@ -94,6 +94,14 @@ PHOTOS = {
     "evening-walk": ("20260907_190251.jpg", "wide", "50% 50%",
                      "Walkers heading out along the pier as the sun drops toward "
                      "the horizon"),
+    # Annotated Google Maps satellite view. The baked-in Google/Airbus credit at
+    # the foot of the image is its attribution — never crop it off.
+    "swim-map": ("LoveQuay_swim_spot_map.jpg", "hero", "50% 50%",
+                 "Satellite map of LoveQuay. A red arrow marks the roughly "
+                 "150-metre stretch along the quay's outer face where most "
+                 "people swim. Labels warn that boats enter and leave through "
+                 "gaps in the marina wall to the north-west, and to stay out of "
+                 "the Western Channel to the south."),
     "pier-bollard": ("20210729_155341.jpg", "card", "50% 50%",
                      "A rusted mooring bollard set into the pier deck, with the "
                      "LOVE installation and a ferry in the distance"),
