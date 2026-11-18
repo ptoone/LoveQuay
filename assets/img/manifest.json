@@ -587,6 +587,20 @@
   "alt": "A large group gathered on the pier around their equipment, the Toronto skyline across the water",
   "src": "20260928_115346.jpg"
  },
+ "hero-republic": {
+  "role": "wide",
+  "widths": [
+   640,
+   960,
+   1440,
+   1920
+  ],
+  "w": 3840,
+  "h": 2160,
+  "pos": "55% 45%",
+  "alt": "A swimmer jumping from the pier into sunlit water while others watch from the deck, one of them in a wheelchair",
+  "src": "LoveQuay2026oct03_5-f003783.jpg"
+ },
  "hero-brand": {
   "role": "wide",
   "widths": [

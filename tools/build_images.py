@@ -171,6 +171,9 @@ PHOTOS = {
     "hero-files": ("20260928_115346.jpg", "wide", "50% 45%",
                    "A large group gathered on the pier around their equipment, the Toronto "
                    "skyline across the water"),
+    "hero-republic": ("LoveQuay2026oct03_5-f003783.jpg", "wide", "55% 45%",
+                      "A swimmer jumping from the pier into sunlit water while others watch "
+                      "from the deck, one of them in a wheelchair"),
     "hero-brand": ("20261002_114021.jpg", "wide", "72% 50%",
                    "The weathered white LOVE sign with its red letters at the east end of "
                    "the pier, the lettering the wordmark is traced from"),
