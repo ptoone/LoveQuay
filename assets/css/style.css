@@ -424,6 +424,12 @@ a { text-decoration-thickness: .07em; text-underline-offset: .18em; }
 .card-lq h3 { margin-bottom: .6rem; }
 .card-lq p:last-child { margin-bottom: 0; }
 
+/* A card used partway down a column rather than as the whole of one. The
+   height: 100% above exists so a row of cards squares off at equal height; it
+   stretches a lone card to the full column and shoves whatever follows it out
+   the bottom. */
+.card-lq--inline { height: auto; }
+
 .card-icon {
   width: 46px; height: 46px; border-radius: 13px;
   display: grid; place-items: center; margin-bottom: 1.1rem;
