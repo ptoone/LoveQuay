@@ -7,6 +7,7 @@
 # orientation and thumbnail are fetched from YouTube and baked into videos.html.
 # Nothing else to edit.
 
+https://www.youtube.com/watch?v=bUda62zXT0o
 https://www.youtube.com/shorts/gX_dPB-ADIU
 https://www.youtube.com/watch?v=DITVhwWk1ps
 https://www.youtube.com/watch?v=ugOmN5xpFbs
