@@ -1,0 +1,384 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
+<title>Print resources &mdash; LoveQuay Republic</title>
+<link rel="icon" href="../assets/brand/favicon.svg">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box}
+  :root{
+    --navy:#082A65; --basin:#0056B8; --water:#007FFF; --sign:#FE010F;
+    --ink:#101B2D; --dim:#5A6A80; --line:#D9E2EE; --bg:#EEF1F6; --card:#fff;
+  }
+  body{margin:0;padding:0 0 90px;background:var(--bg);color:var(--ink);
+       font-family:Inter,system-ui,-apple-system,sans-serif;line-height:1.6;
+       -webkit-font-smoothing:antialiased}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+
+  header{background:var(--navy);color:#fff;padding:38px 0 34px;margin-bottom:30px}
+  header .wrap{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+  header img{height:38px;width:auto;display:block}
+  header h1{font-family:Poppins,sans-serif;font-size:26px;margin:0;letter-spacing:-.01em}
+  header p{margin:2px 0 0;color:#A8C4EC;font-size:14px}
+
+  h2{font-family:Poppins,sans-serif;font-size:19px;color:var(--navy);
+     margin:44px 0 4px;letter-spacing:-.01em}
+  h2 + .lede{margin:0 0 20px;color:var(--dim);font-size:14.5px;max-width:70ch}
+  h3{font-family:Poppins,sans-serif;font-size:14px;color:var(--navy);
+     margin:0 0 14px;text-transform:uppercase;letter-spacing:.07em}
+
+  .note{background:#fff;border-left:4px solid var(--basin);border-radius:0 10px 10px 0;
+        padding:16px 20px;margin:0 0 30px;font-size:14.5px;
+        box-shadow:0 10px 30px -22px rgba(8,42,101,.55)}
+  .note.warn{border-left-color:var(--sign)}
+  .note strong{color:var(--navy)}
+  .note p{margin:0 0 9px} .note p:last-child{margin:0}
+
+  .panel{background:var(--card);border-radius:14px;padding:22px 24px;margin:0 0 20px;
+         box-shadow:0 10px 30px -20px rgba(8,42,101,.5)}
+
+  .grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fill,minmax(188px,1fr))}
+  .item{background:var(--card);border-radius:12px;overflow:hidden;
+        box-shadow:0 10px 26px -20px rgba(8,42,101,.55);display:flex;flex-direction:column}
+  .shot{display:flex;align-items:center;justify-content:center;padding:18px;
+        background:repeating-conic-gradient(#F4F7FB 0 25%,#E8EDF5 0 50%) 0 0/16px 16px;
+        min-height:156px}
+  .shot img{width:120px;height:120px;display:block;
+            filter:drop-shadow(0 4px 10px rgba(8,42,101,.22))}
+  .meta{padding:12px 14px 14px;border-top:1px solid var(--line)}
+  .meta .fn{font-family:"Roboto Mono",ui-monospace,Consolas,monospace;font-size:11.5px;
+            color:var(--navy);word-break:break-all;display:block;margin-bottom:5px}
+  .meta .d{font-size:12.5px;color:var(--dim);margin:0 0 8px;line-height:1.45}
+  .meta a{font-size:12.5px;font-weight:600;color:var(--basin);text-decoration:none}
+  .meta a:hover{text-decoration:underline}
+
+  .wide{display:block;width:100%;height:auto;border-radius:8px;border:1px solid var(--line)}
+  .onwhite{background:#fff;padding:16px}
+
+  table{width:100%;border-collapse:collapse;font-size:14px;margin:0}
+  th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font-size:11.5px;text-transform:uppercase;letter-spacing:.07em;color:var(--dim);
+     font-weight:600;white-space:nowrap}
+  td code,p code,li code,.lbl code{font-family:"Roboto Mono",ui-monospace,Consolas,monospace;
+     font-size:12.5px;background:#F2F5FA;padding:1px 5px;border-radius:4px;color:var(--navy)}
+  tr:last-child td{border-bottom:0}
+
+  .sw{display:flex;gap:14px;flex-wrap:wrap;margin:0}
+  .sw > div{flex:1 1 150px;border-radius:10px;overflow:hidden;border:1px solid var(--line)}
+  .sw .chip{height:62px}
+  .sw .lbl{padding:9px 12px;background:#fff;font-size:12.5px;line-height:1.4}
+  .sw .lbl b{display:block;color:var(--navy);font-size:13px}
+  .sw .lbl code{font-size:11.5px;background:none;padding:0}
+
+  ul{margin:0;padding-left:20px;font-size:14.5px} li{margin-bottom:7px}
+  a{color:var(--basin)}
+  footer{margin-top:48px;padding-top:22px;border-top:1px solid var(--line);
+         color:var(--dim);font-size:13px}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <img src="../assets/brand/logo-horizontal-white.svg" alt="LoveQuay">
+    <div>
+      <h1>Print resources</h1>
+      <p>Everything that goes to a printer, in one place.</p>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="note warn">
+    <p><strong>This page is unlisted, not private.</strong> Nothing on the site
+    links to it and it carries a <code>noindex</code> tag, so it should stay out
+    of search results. It still sits on a public web server: anyone who has the
+    URL can read it, and every file below was already being served publicly from
+    <code>lovequay.com/assets/brand/</code> before this page existed.</p>
+    <p>Treat the URL as the only lock on it. If it needs to be genuinely
+    private, <code>lovequay.com</code> is already a Cloudflare zone, so
+    Cloudflare Access can put a real sign-in in front of <code>/print/*</code>.</p>
+  </div>
+
+  <h2>Sending these to a printer</h2>
+  <p class="lede">The short version, to paste into an email alongside the files.</p>
+  <div class="panel">
+    <table>
+      <tr><th>Format</th><td>SVG, vector, with no external font dependencies &mdash;
+        every letter is an outlined path, so nothing re-flows or substitutes on a
+        machine that has never heard of our typefaces. Most shops would rather have
+        PDF; any of these converts without rasterising.</td></tr>
+      <tr><th>Colour</th><td>Files are RGB. Read the palette section before anyone
+        converts them.</td></tr>
+      <tr><th>Stickers</th><td>1&Prime; finished. Artboard 90pt (1.25&Prime;), trim at
+        72pt (1.00&Prime;), safe area 54pt (0.75&Prime;). Bleed is 0.125&Prime; on every
+        side and is already drawn &mdash; do not add more.</td></tr>
+      <tr><th>Certificate</th><td>US Letter landscape, 792 &times; 612pt. No bleed:
+        the border floats inside the trim on purpose, so it can be printed on an
+        ordinary office machine with no edge-to-edge capability.</td></tr>
+      <tr><th>Card</th><td>ID-1, 85.6 &times; 54mm, 3.18mm corner radius. See the
+        note in that section &mdash; there is no press-ready file yet.</td></tr>
+    </table>
+  </div>
+
+  <h2>Stickers</h2>
+  <p class="lede">Fifteen files, five designs. Each exists as a square or a circular
+  die, and most in a dark and a light colourway. The checkerboard behind each
+  preview is transparency, not part of the art.</p>
+
+  <div class="note">
+    <p><strong>The die is an instruction, not a line in the file.</strong> Every
+    sticker here &mdash; round and square alike &mdash; is drawn as a filled
+    1.25&Prime; square, because the background has to survive wherever the blade
+    actually lands. None of them contains a drawn cut line, so the round ones look
+    square in the previews below. That is correct, and it is also why the printer
+    has to be told in words: <em>1&Prime; circle, centred on the artboard</em>, or
+    <em>1&Prime; square with a 0.125&Prime; corner radius</em>.</p>
+    <p>What actually differs between a square file and its round sibling is the
+    layout: the round versions pull their content into a circular safe area, so
+    nothing falls off the curve. Sending the square file to a circular die would
+    clip it.</p>
+    <p>If a printer wants to see the cut and safe lines drawn on the art, the proof
+    sheet at <a href="../drafts/stickers.html">drafts/stickers.html</a> shows every
+    design with trim, die and safe area marked.</p>
+  </div>
+
+  <div class="panel">
+    <h3>Republic &mdash; wordmark, logo and the two lines</h3>
+    <div class="grid">
+      <div class="item"><div class="shot"><img src="../assets/brand/sticker-republic.svg" alt=""></div>
+        <div class="meta"><span class="fn">sticker-republic.svg</span>
+        <p class="d">Square die, navy. The default.</p>
+        <a href="../assets/brand/sticker-republic.svg" download>Download</a></div></div>
+      <div class="item"><div class="shot"><img src="../assets/brand/sticker-republic-light.svg" alt=""></div>
+        <div class="meta"><span class="fn">sticker-republic-light.svg</span>
+        <p class="d">Square die, white ground.</p>
+        <a href="../assets/brand/sticker-republic-light.svg" download>Download</a></div></div>
+      <div class="item"><div class="shot"><img src="../assets/brand/sticker-republic-round.svg" alt=""></div>
+        <div class="meta"><span class="fn">sticker-republic-round.svg</span>
+        <p class="d">Circular die, navy.</p>
+        <a href="../assets/brand/sticker-republic-round.svg" download>Download</a></div></div>
+      <div class="item"><div class="shot"><img src="../assets/brand/sticker-republic-round-light.svg" alt=""></div>
+        <div class="meta"><span class="fn">sticker-republic-round-light.svg</span>
+        <p class="d">Circular die, white ground.</p>
+        <a href="../assets/brand/sticker-republic-round-light.svg" download>Download</a></div></div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h3>Email &mdash; the same, carrying an address</h3>
+    <div class="grid">
+      <div class="item"><div class="shot"><img src="../assets/brand/sticker-email.svg" alt=""></div>
+        <div class="meta"><span class="fn">sticker-email.svg</span>
+        <p class="d">Square die, navy.</p>
+        <a href="../assets/brand/sticker-email.svg" download>Download</a></div></div>
+      <div class="item"><div class="shot"><img src="../assets/brand/sticker-email-light.svg" alt=""></div>
+        <div class="meta"><span class="fn">sticker-email-light.svg</span>
+        <p class="d">Square die, white ground.</p>
+        <a href="../assets/brand/sticker-email-light.svg" download>Download</a></div></div>
+      <div class="item"><div class="shot"><img src="../assets/brand/sticker-email-round.svg" alt=""></div>
+        <div class="meta"><span class="fn">sticker-email-round.svg</span>
+        <p class="d">Circular die, navy.</p>
+        <a href="../assets/brand/sticker-email-round.svg" download>Download</a></div></div>
+      <div class="item"><div class="shot"><img src="../assets/brand/sticker-email-round-light.svg" alt=""></div>
+        <div class="meta"><span class="fn">sticker-email-round-light.svg</span>
+        <p class="d">Circular die, white ground.</p>
+        <a href="../assets/brand/sticker-email-round-light.svg" download>Download</a></div></div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h3>Seal &mdash; stacked LOVE / QUAY in a ring of text</h3>
+    <div class="grid">
+      <div class="item"><div class="shot"><img src="../assets/brand/sticker-seal.svg" alt=""></div>
+        <div class="meta"><span class="fn">sticker-seal.svg</span>
+        <p class="d">Red ground, white lettering, the full text ring.</p>
+        <a href="../assets/brand/sticker-seal.svg" download>Download</a></div></div>
+      <div class="item"><div class="shot"><img src="../assets/brand/sticker-seal-light.svg" alt=""></div>
+        <div class="meta"><span class="fn">sticker-seal-light.svg</span>
+        <p class="d">The same ring, reversed onto white.</p>
+        <a href="../assets/brand/sticker-seal-light.svg" download>Download</a></div></div>
+      <div class="item"><div class="shot"><img src="../assets/brand/sticker-seal-roomy.svg" alt=""></div>
+        <div class="meta"><span class="fn">sticker-seal-roomy.svg</span>
+        <p class="d">Fewer words in the ring, set larger. Use this one if 1&Prime; is
+        the final size and the full ring reads too tight.</p>
+        <a href="../assets/brand/sticker-seal-roomy.svg" download>Download</a></div></div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h3>Logo only</h3>
+    <div class="grid">
+      <div class="item"><div class="shot"><img src="../assets/brand/sticker-logo-round.svg" alt=""></div>
+        <div class="meta"><span class="fn">sticker-logo-round.svg</span>
+        <p class="d">Circular die, navy.</p>
+        <a href="../assets/brand/sticker-logo-round.svg" download>Download</a></div></div>
+      <div class="item"><div class="shot"><img src="../assets/brand/sticker-logo-round-light.svg" alt=""></div>
+        <div class="meta"><span class="fn">sticker-logo-round-light.svg</span>
+        <p class="d">Circular die, white ground. The quietest of the set.</p>
+        <a href="../assets/brand/sticker-logo-round-light.svg" download>Download</a></div></div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h3>Photo</h3>
+    <div class="grid">
+      <div class="item"><div class="shot"><img src="../assets/brand/sticker-dive.svg" alt=""></div>
+        <div class="meta"><span class="fn">sticker-dive.svg</span>
+        <p class="d">Square die. Photograph with a gradient under the wordmark.</p>
+        <a href="../assets/brand/sticker-dive.svg" download>Download</a></div></div>
+      <div class="item"><div class="shot"><img src="../assets/brand/sticker-dive-round.svg" alt=""></div>
+        <div class="meta"><span class="fn">sticker-dive-round.svg</span>
+        <p class="d">Circular die, same photograph.</p>
+        <a href="../assets/brand/sticker-dive-round.svg" download>Download</a></div></div>
+    </div>
+  </div>
+
+  <div class="note">
+    <p><strong>Smallest type on each design, measured rather than estimated.</strong>
+    This is the clearance from the smallest lettering to the trim line, so a
+    printer can tell you straight away whether their press holds it.</p>
+    <p>Dive square 3.53mm &middot; Email square 2.59mm &middot; Logo round 2.55mm
+    &middot; Republic square 2.20mm &middot; Seal roomy 2.12mm &middot; Dive round
+    2.05mm &middot; Republic round 1.97mm &middot; Email round 1.90mm &middot;
+    Seal 1.73mm.</p>
+    <p>A circular die holds materially less than a square one of the same width,
+    because the available line narrows as you move away from the centre. That is
+    why the round versions sit lower in that list, and why the roomy seal exists
+    at all.</p>
+  </div>
+
+  <h2>Certificate of citizenship</h2>
+  <p class="lede">US Letter landscape. Spaces are left blank for the name, the date
+  and two signatures &mdash; they are meant to be written and signed by hand.</p>
+  <div class="panel">
+    <img class="wide onwhite" src="../assets/brand/certificate-citizen.svg" alt="Certificate of citizenship">
+    <table style="margin-top:14px">
+      <tr><th>File</th><td><code>certificate-citizen.svg</code> &mdash;
+        <a href="../assets/brand/certificate-citizen.svg" download>Download</a></td></tr>
+      <tr><th>Size</th><td>792 &times; 612pt, US Letter landscape, no bleed</td></tr>
+      <tr><th>Paper</th><td>160gsm or heavier holds a signature without the pen
+        bleeding. It prints on an office laser as-is &mdash; the border is inset far
+        enough that a non-borderless machine will not clip it.</td></tr>
+    </table>
+  </div>
+
+  <h2>Citizen card</h2>
+  <p class="lede">ID-1, the same size as a driving licence.</p>
+  <div class="note warn">
+    <p><strong>There is no press-ready card file yet.</strong> The card exists only
+    as <a href="../drafts/idcard.html">a browser preview</a>, built by
+    <code>tools/build_idcard_draft.py</code>, which lays it out in HTML rather than
+    emitting artwork. Sending cards to a bureau needs a real 85.6 &times; 54mm
+    vector file with bleed, plus a per-card data merge for the name, number, dates
+    and QR code.</p>
+  </div>
+
+  <h2>Logos, marks and wordmarks</h2>
+  <p class="lede">The pieces everything else is built from.</p>
+
+  <div class="panel">
+    <h3>Republic lockup &mdash; new</h3>
+    <img class="wide onwhite" src="../assets/brand/lockup-republic-2000.png" alt="LOVEQUAY REPUBLIC">
+    <table style="margin-top:14px">
+      <tr><th>As supplied</th><td><code>lockup-republic-2000.png</code> &mdash; 2000 &times; 241px
+        on solid white.
+        <a href="../assets/brand/lockup-republic-2000.png" download>Download</a></td></tr>
+      <tr><th>Transparent</th><td><code>lockup-republic-alpha-2000.png</code> &mdash; same colour,
+        white background removed so it can sit on navy or on a photograph.
+        <a href="../assets/brand/lockup-republic-alpha-2000.png" download>Download</a></td></tr>
+      <tr><th>In Sign&nbsp;Red</th><td><code>lockup-republic-signred-2000.png</code> &mdash;
+        transparent, recoloured to the brand red.
+        <a href="../assets/brand/lockup-republic-signred-2000.png" download>Download</a></td></tr>
+      <tr><th>Print size</th><td>2000px wide is 6.67&Prime; (169mm) at 300dpi. Enough for
+        a sticker, a letterhead or a card; not enough for a banner or a shirt front.</td></tr>
+    </table>
+  </div>
+
+  <div class="panel">
+    <h3>Wordmark &mdash; the traced sign lettering</h3>
+    <img class="wide onwhite" src="../assets/brand/wordmark.svg" alt="LOVEQUAY" style="max-height:90px;object-fit:contain">
+    <table style="margin-top:14px">
+      <tr><th>Files</th><td><code>wordmark.svg</code> (Sign Red) &middot;
+        <code>wordmark-navy.svg</code> &middot; <code>wordmark-white.svg</code></td></tr>
+      <tr><th>Vector</th><td>Yes, and resolution-free. Use this rather than the
+        lockup PNG wherever the word stands on its own.</td></tr>
+    </table>
+  </div>
+
+  <div class="panel">
+    <h3>Mark and full logos</h3>
+    <table>
+      <tr><th>Mark</th><td><code>mark.svg</code> &middot; <code>mark-navy.svg</code> &middot;
+        <code>mark-red.svg</code> &middot; <code>mark-white.svg</code> &middot;
+        <code>mark-flat.svg</code> (two flat colours, for vinyl and one-colour work) &middot;
+        <code>mark-reversed.svg</code></td></tr>
+      <tr><th>Horizontal</th><td><code>logo-horizontal.svg</code> &middot;
+        <code>logo-horizontal-white.svg</code></td></tr>
+      <tr><th>Stacked</th><td><code>logo-stacked.svg</code> &middot;
+        <code>logo-stacked-white.svg</code></td></tr>
+      <tr><th>Inline</th><td><code>logo-inline.svg</code> &middot;
+        <code>logo-inline-white.svg</code></td></tr>
+    </table>
+    <p style="margin:12px 0 0;font-size:14px;color:var(--dim)">
+      All of these are on the public <a href="../brand.html">brand page</a> as well,
+      with the rules for using them.</p>
+  </div>
+
+  <h2>Colour</h2>
+  <p class="lede">Hex values exactly as the files carry them.</p>
+  <div class="panel">
+    <div class="sw">
+      <div><div class="chip" style="background:#082A65"></div>
+        <div class="lbl"><b>Quay Navy</b><code>#082A65</code></div></div>
+      <div><div class="chip" style="background:#0056B8"></div>
+        <div class="lbl"><b>Basin Blue</b><code>#0056B8</code></div></div>
+      <div><div class="chip" style="background:#007FFF"></div>
+        <div class="lbl"><b>Water Blue</b><code>#007FFF</code></div></div>
+      <div><div class="chip" style="background:#FE010F"></div>
+        <div class="lbl"><b>Sign Red</b><code>#FE010F</code></div></div>
+      <div><div class="chip" style="background:#C13D4E"></div>
+        <div class="lbl"><b>Lockup crimson</b><code>#C13D4E</code></div></div>
+    </div>
+    <div class="note warn" style="margin:20px 0 0">
+      <p><strong>Sign Red will not survive CMYK.</strong> <code>#FE010F</code> sits
+      outside the process-colour gamut &mdash; on a four-colour press it comes back
+      noticeably duller and a little brown. For stickers, ask the printer for a spot
+      red matched to the file. Do not let anyone convert it silently and send you a
+      proof as if nothing happened.</p>
+      <p><strong>The lockup is a different red.</strong> The supplied artwork is
+      <code>#C13D4E</code>, a much softer crimson than Sign Red rather than a
+      variation on it. Side by side, the two read as two different brands. The
+      <code>-signred</code> version above exists so that the choice is a decision
+      rather than an accident.</p>
+    </div>
+  </div>
+
+  <h2>Known gaps</h2>
+  <div class="panel">
+    <ul>
+      <li><strong>The card has no print file.</strong> Browser preview only, as above.</li>
+      <li><strong>The Republic lockup is raster, not vector.</strong> It cannot be
+      rebuilt from our own lettering: the traced sign alphabet is exactly eight
+      glyphs &mdash; L, O, V, E, Q, U, A, Y &mdash; and <em>REPUBLIC</em> needs
+      R, P, B, I and C, which the sign itself does not have. The source font or a
+      vector file would fix this permanently and would unlock every other word too.</li>
+      <li><strong>Sticker finish is undecided</strong> &mdash; matte or gloss, paper
+      or vinyl, kiss-cut sheets or singles, and in what quantity.</li>
+    </ul>
+  </div>
+
+  <footer>
+    Unlisted page &mdash; not in the sitemap, not linked from the site.
+    Files are generated by <code>tools/build_brand.py</code>,
+    <code>tools/build_stickers.py</code> and <code>tools/build_certificate.py</code>;
+    edit those rather than the SVGs.
+  </footer>
+
+</div>
+</body>
+</html>
