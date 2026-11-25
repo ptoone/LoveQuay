@@ -129,6 +129,29 @@
     void check(input.value);
   });
 
+  /* ------------------------------------------------------------- on load -- */
+
+  /* The QR on a card points at this page with ?id=LQ-XXXX-XXXX. Somebody who
+   * scanned a card with their phone's own camera app arrives here already
+   * holding the number, so asking them to type it back in would be absurd:
+   * fill it in and check it straight away.
+   *
+   * Only `id` is read, and only `id`. Reading the query loosely would let a
+   * tracking parameter that happened to normalise to eight valid characters
+   * fire a verification nobody asked for.
+   *
+   * A bad number in the URL falls through to check(), which says "Not a card
+   * number" — the same answer as typing it, which is the honest one. The query
+   * is left in the address bar on purpose, so a reload re-checks. */
+  var qid = location.search.match(/[?&]id=([^&#]*)/i);
+  if (qid && qid[1]) {
+    var raw = qid[1];
+    try { raw = decodeURIComponent(raw.replace(/\+/g, ' ')); } catch (err) { /* keep it raw */ }
+    var scanned = window.LQID.parse(raw);
+    input.value = scanned.ok ? scanned.id : raw.slice(0, 40);
+    void check(input.value);
+  }
+
   /* ---------------------------------------------------------------- scan -- */
 
   function canScan() {

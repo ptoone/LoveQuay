@@ -28,7 +28,13 @@
     "logs": { "head_sampling_rate": 1 }
   },
 
+  // A custom domain, so wrangler creates and keeps the api.lovequay.com DNS
+  // record itself. The alternative — a plain route — needs a proxied record to
+  // already exist at that hostname, which is one more thing to hand-maintain
+  // and to forget. A custom domain takes the WHOLE hostname and cannot carry a
+  // path, so this Worker answers every path on api.lovequay.com; src/index.js
+  // 404s anything that is not /v1/verify, which is what makes that safe.
   "routes": [
-    { "pattern": "api.lovequay.com/v1/*", "custom_domain": false, "zone_name": "lovequay.com" }
+    { "pattern": "api.lovequay.com", "custom_domain": true }
   ]
 }

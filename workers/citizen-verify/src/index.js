@@ -84,9 +84,16 @@ function json(body, status, origin, extra) {
 /**
  * Ask WHMCS about one service. Returns {status, nextDue} or throws.
  *
+ * "Active" is the whole test, and it is the right one: confirmed against this
+ * WHMCS install that a service only reads Active while it is paid up, so a
+ * lapsed subscription cannot leave a card reading valid.
+ *
  * WHMCS does not document the full set of status values — the API reference
  * only ever shows "Active" and "Terminated" — so anything that is not exactly
  * "Active" is treated as not valid. That is the safe direction to be wrong in.
+ * The cost of that choice is narrow and worth knowing: if this install ever
+ * starts returning a compound status such as "Active - Pending Upgrade", a
+ * genuine paid card would read "Not active" until this comparison is widened.
  */
 async function lookupService(env, serviceId) {
   const form = new URLSearchParams({
