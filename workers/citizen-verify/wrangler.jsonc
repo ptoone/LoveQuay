@@ -1,40 +1,47 @@
 {
-  "name": "lovequay-citizen-verify",
-  "main": "src/index.js",
-  "compatibility_date": "2026-11-18",
-  "upload_source_maps": true,
-
-  // WHMCS_IDENTIFIER, WHMCS_SECRET and WHMCS_API_URL are secrets and are set
-  // with `wrangler secret put`. They must never appear in this file.
-
-  // card:<8 chars> -> { "serviceid": 1234 }
-  // Written when a card is issued. Holds no name, no email, no address.
-  "kv_namespaces": [
-    { "binding": "CARDS", "id": "REPLACE_WITH_KV_ID" }
-  ],
-
-  // Per-IP. The limit is approximate and applies per Cloudflare location,
-  // which is fine here — it exists to blunt scripted scanning, not to be exact.
-  "ratelimits": [
-    {
-      "name": "VERIFY_LIMIT",
-      "namespace_id": "1",
-      "simple": { "limit": 30, "period": 60 }
-    }
-  ],
-
-  "observability": {
-    "enabled": true,
-    "logs": { "head_sampling_rate": 1 }
-  },
-
-  // A custom domain, so wrangler creates and keeps the api.lovequay.com DNS
-  // record itself. The alternative — a plain route — needs a proxied record to
-  // already exist at that hostname, which is one more thing to hand-maintain
-  // and to forget. A custom domain takes the WHOLE hostname and cannot carry a
-  // path, so this Worker answers every path on api.lovequay.com; src/index.js
-  // 404s anything that is not /v1/verify, which is what makes that safe.
-  "routes": [
-    { "pattern": "api.lovequay.com", "custom_domain": true }
-  ]
+	"name": "lovequay-citizen-verify",
+	"main": "src/index.js",
+	"compatibility_date": "2026-11-18",
+	"upload_source_maps": true,
+	// WHMCS_IDENTIFIER, WHMCS_SECRET and WHMCS_API_URL are secrets and are set
+	// with `wrangler secret put`. They must never appear in this file.
+	// card:<8 chars> -> { "serviceid": 1234 }
+	// Written when a card is issued. Holds no name, no email, no address.
+	"kv_namespaces": [
+		{
+			"binding": "CARDS",
+			"id": "7172c599cbbd47cbabc464269eee6fa6",
+			"remote": true
+		}
+	],
+	// Per-IP. The limit is approximate and applies per Cloudflare location,
+	// which is fine here — it exists to blunt scripted scanning, not to be exact.
+	"ratelimits": [
+		{
+			"name": "VERIFY_LIMIT",
+			"namespace_id": "1",
+			"simple": {
+				"limit": 30,
+				"period": 60
+			}
+		}
+	],
+	"observability": {
+		"enabled": true,
+		"logs": {
+			"head_sampling_rate": 1
+		}
+	},
+	// A custom domain, so wrangler creates and keeps the api.lovequay.com DNS
+	// record itself. The alternative — a plain route — needs a proxied record to
+	// already exist at that hostname, which is one more thing to hand-maintain
+	// and to forget. A custom domain takes the WHOLE hostname and cannot carry a
+	// path, so this Worker answers every path on api.lovequay.com; src/index.js
+	// 404s anything that is not /v1/verify, which is what makes that safe.
+	"routes": [
+		{
+			"pattern": "api.lovequay.com",
+			"custom_domain": true
+		}
+	]
 }
