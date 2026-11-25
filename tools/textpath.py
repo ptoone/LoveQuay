@@ -2,7 +2,7 @@
 from fontTools.ttLib import TTFont
 from fontTools.pens.svgPathPen import SVGPathPen
 from fontTools.pens.transformPen import TransformPen
-from fontTools.pens.recordingPen import RecordingPen
+from fontTools.pens.recordingPen import RecordingPen, DecomposingRecordingPen
 from fontTools.pens.boundsPen import BoundsPen
 from fontTools.misc.transform import Transform
 
@@ -24,7 +24,12 @@ class Typesetter:
         cx = 0.0
         names = [self.cmap[ord(c)] for c in text]
         for i, gn in enumerate(names):
-            r = RecordingPen()
+            # Decomposing, not plain recording: a composite glyph (the middot,
+            # and every accented letter) records an addComponent that the
+            # SVGPathPen cannot resolve later, and the whole run dies with
+            # "'NoneType' object is not subscriptable". Resolving it here keeps
+            # the recording to contours only.
+            r = DecomposingRecordingPen(self.gs)
             self.gs[gn].draw(TransformPen(r, Transform(1, 0, 0, -1, cx, 0)))
             rec.value.extend(r.value)
             cx += self.hmtx[gn][0] + tracking * self.upem
