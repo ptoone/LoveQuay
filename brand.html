@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Brand — LoveQuay Swim Pier</title>
-<meta name="description" content="The LoveQuay identity: the heart-shaped pool mark, logo lockups, colour palette, typography, and downloadable files.">
+<meta name="description" content="The LoveQuay identity: the heart-shaped pool mark, the swimmer mark, logo lockups, colour palette, typography, and downloadable files.">
 <link rel="canonical" href="https://lovequay.com/brand.html">
 
 <meta property="og:type" content="article">
@@ -408,6 +408,93 @@
   </div>
 </section>
 
+<!-- ====================== SWIMMER MARK ====================== -->
+<section class="section">
+  <div class="container">
+    <div class="row g-5 align-items-center mb-5">
+      <div class="col-lg-5">
+        <p class="eyebrow">Second mark</p>
+        <div class="rule"></div>
+        <h2>A swimmer, drawn separately.</h2>
+        <p class="lead-lg mt-4">The heart pool is the mark. This is a second, standalone drawing: a
+          front-crawl swimmer reaching out of two rows of water, inside an open ring. It arrived as
+          finished artwork rather than coming out of <code>build_brand.py</code>, so none of the
+          heart's geometry is in it.</p>
+        <p>It is kept here as a brand asset, not as a replacement. Nothing on the site uses it yet —
+          the navigation logo, the favicon and the app tiles are all still the heart.</p>
+        <p class="mb-0">Two cuts. The plain files sit at the artwork's own proportion,
+          1145&nbsp;×&nbsp;1139 — a whisker wider than tall, so a 512 file is 512&nbsp;×&nbsp;509.
+          The square cut centres it in a true square with a little air on each side, for anywhere a
+          non-square logo would be letterboxed by someone else's layout.</p>
+      </div>
+      <div class="col-lg-7">
+        <div class="row g-4">
+          <div class="col-6 col-sm-4 reveal">
+            <div class="logo-tile">
+              <div>
+                <img src="assets/brand/logo-swimmer.svg" alt="The LoveQuay swimmer mark: a red swimmer over blue water inside an open green ring" width="1145" height="1139" style="max-width:min(100%,150px)">
+                <p class="logo-tile__label mb-0">Natural &middot; on white</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-6 col-sm-4 reveal reveal--d1">
+            <div class="logo-tile logo-tile--sand">
+              <div>
+                <img src="assets/brand/logo-swimmer.svg" alt="The swimmer mark on sand" width="1145" height="1139" style="max-width:min(100%,150px)">
+                <p class="logo-tile__label mb-0">On sand</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-6 col-sm-4 reveal reveal--d2">
+            <div class="logo-tile logo-tile--navy">
+              <div>
+                <img src="assets/brand/logo-swimmer-square-512.png" alt="The swimmer mark, square cut, on navy" width="512" height="512" style="max-width:min(100%,150px)">
+                <p class="logo-tile__label mb-0">Square cut &middot; on navy</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row g-4 align-items-end">
+      <div class="col-lg-7">
+        <div class="d-flex align-items-end gap-4 flex-wrap">
+          <div><img src="assets/brand/logo-swimmer-square-180.png" alt="" width="180" height="180"><br>
+            <span class="logo-tile__label">180&nbsp;px</span></div>
+          <div><img src="assets/brand/logo-swimmer-square-64.png" alt="" width="64" height="64"><br>
+            <span class="logo-tile__label">64&nbsp;px</span></div>
+          <div><img src="assets/brand/logo-swimmer-square-48.png" alt="" width="48" height="48"><br>
+            <span class="logo-tile__label">48&nbsp;px &middot; floor</span></div>
+          <div class="dont"><img src="assets/brand/logo-swimmer-square-32.png" alt="" width="32" height="32"><br>
+            <span class="logo-tile__label">32&nbsp;px</span></div>
+          <div class="dont"><img src="assets/brand/logo-swimmer-square-16.png" alt="" width="16" height="16"><br>
+            <span class="logo-tile__label">16&nbsp;px</span></div>
+        </div>
+      </div>
+      <div class="col-lg-5">
+        <div class="notice mb-0">
+          <h3>A ring, an arm, a head and two waves</h3>
+          <p class="mb-0">That is four things in one square, and below about 48&nbsp;px they stop
+            reading as four things: the two water lines merge into a single bar and the arm breaks
+            away from the body. It is a logo, not a favicon — the heart tile still does the small
+            sizes.</p>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-5">
+      <div class="col-lg-8">
+        <div class="notice mb-0">
+          <h3>These colours are not the palette</h3>
+          <p class="mb-0">As drawn it uses pure primaries — <code>#00a000</code>,
+            <code>#ff0000</code> and <code>#0000ff</code> — not Sign Red <code>#FE010F</code>, Basin
+            Blue <code>#0056B8</code> and Quay Navy <code>#082A65</code>. It ships exactly as
+            supplied, so set it next to anything else on this page and the reds will not match.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ====================== CLEAR SPACE & SMALL SIZES ====================== -->
 <section class="section section--sand">
   <div class="container">
@@ -620,10 +707,13 @@
         <h2>Take what you need.</h2>
         <p class="lead-lg mt-4">SVG for anything on a screen or in print. PNG where SVG isn't
           accepted. All lettering is outlined, so nothing depends on a font being installed.</p>
-        <p>Every file is regenerated from one script —
+        <p>Every heart file is regenerated from one script —
           <code>tools/build_brand.py</code> — off two traced outlines, the heart and the eight
-          letters. The geometry cannot drift between files because there is only one copy of it.</p>
-        <p class="mb-0">To rebuild: <code>python tools/build_brand.py --png</code></p>
+          letters. The geometry cannot drift between files because there is only one copy of it. The
+          swimmer mark is the exception: it is supplied artwork, so its script only rasters the SVG
+          and never redraws it.</p>
+        <p class="mb-0">To rebuild: <code>python tools/build_brand.py --png</code> and
+          <code>python tools/build_logo_swimmer.py</code></p>
       </div>
       <div class="col-lg-8 reveal reveal--d1">
         <div class="row g-3">
@@ -679,6 +769,47 @@
                 <li><a href="assets/brand/favicon-16.png" download>favicon-16.png</a></li>
                 <li><a href="favicon.ico" download>favicon.ico</a></li>
               </ul>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="card-lq">
+              <h3>Swimmer mark</h3>
+              <p class="mt-3 mb-2">The second mark, supplied as artwork. Rebuild the PNGs with
+                <code>python tools/build_logo_swimmer.py</code>.</p>
+              <div class="row">
+                <div class="col-sm-4">
+                  <ul class="mt-2" style="list-style:none;padding:0;line-height:2">
+                    <li><a href="assets/brand/logo-swimmer.svg" download>logo-swimmer.svg</a> &middot; master</li>
+                    <li><a href="assets/brand/logo-swimmer.pdf" download>logo-swimmer.pdf</a></li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <p class="logo-tile__label mt-2 mb-1">Natural proportion</p>
+                  <ul style="list-style:none;padding:0;line-height:2">
+                    <li><a href="assets/brand/logo-swimmer-2048.png" download>logo-swimmer-2048.png</a></li>
+                    <li><a href="assets/brand/logo-swimmer-1024.png" download>logo-swimmer-1024.png</a></li>
+                    <li><a href="assets/brand/logo-swimmer-512.png" download>logo-swimmer-512.png</a></li>
+                    <li><a href="assets/brand/logo-swimmer-256.png" download>logo-swimmer-256.png</a></li>
+                    <li><a href="assets/brand/logo-swimmer-128.png" download>logo-swimmer-128.png</a></li>
+                    <li><a href="assets/brand/logo-swimmer-64.png" download>logo-swimmer-64.png</a></li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <p class="logo-tile__label mt-2 mb-1">Square</p>
+                  <ul style="list-style:none;padding:0;line-height:2">
+                    <li><a href="assets/brand/logo-swimmer-square-1024.png" download>square-1024.png</a></li>
+                    <li><a href="assets/brand/logo-swimmer-square-512.png" download>square-512.png</a></li>
+                    <li><a href="assets/brand/logo-swimmer-square-256.png" download>square-256.png</a></li>
+                    <li><a href="assets/brand/logo-swimmer-square-192.png" download>square-192.png</a></li>
+                    <li><a href="assets/brand/logo-swimmer-square-180.png" download>square-180.png</a></li>
+                    <li><a href="assets/brand/logo-swimmer-square-128.png" download>square-128.png</a></li>
+                    <li><a href="assets/brand/logo-swimmer-square-64.png" download>square-64.png</a></li>
+                    <li><a href="assets/brand/logo-swimmer-square-48.png" download>square-48.png</a></li>
+                    <li><a href="assets/brand/logo-swimmer-square-32.png" download>square-32.png</a></li>
+                    <li><a href="assets/brand/logo-swimmer-square-16.png" download>square-16.png</a></li>
+                  </ul>
+                </div>
+              </div>
             </div>
           </div>
         </div>
