@@ -370,7 +370,10 @@ def ico():
     except ImportError:
         print("  (favicon.ico skipped — Pillow not installed)")
         return
-    sizes = (16, 32, 48, 64)
+    # Largest first. Pillow writes the .ico from the image save() is called on
+    # and silently drops every requested size bigger than it, so starting at 16
+    # produced a 16px-only favicon.ico that browsers then upscaled.
+    sizes = (64, 48, 32, 16)
     for s in sizes:
         png("favicon.svg", f"_ico{s}.png", s)
     imgs = [Image.open(os.path.join(OUT, f"_ico{s}.png")).convert("RGBA") for s in sizes]
