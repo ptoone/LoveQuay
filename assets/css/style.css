@@ -974,7 +974,14 @@ a { text-decoration-thickness: .07em; text-underline-offset: .18em; }
   margin-bottom: 1.1rem; scroll-margin-top: calc(var(--lq-nav-h) + 1rem);
 }
 .quiz-q.is-missing { border-color: var(--lq-red); box-shadow: 0 0 0 3px rgba(200, 16, 46, .1); }
-.quiz-q__legend { display: flex; gap: .85rem; float: none; width: 100%; padding: 0; margin-bottom: 1rem; }
+.quiz-q__legend {
+  /* A legend is laid out against the fieldset's top border, not inside its
+     padding box, so the question rendered above the white card entirely and
+     sat on the sand. Floating it drops it back into normal flow, where it
+     takes the card's padding like everything else; .quiz-opts clears it. */
+  float: left; width: 100%; padding: 0;
+  display: flex; gap: .85rem; margin-bottom: 1rem;
+}
 .quiz-q__num {
   flex: 0 0 auto; width: 1.9rem; height: 1.9rem; border-radius: 50%;
   background: var(--lq-navy); color: #fff;
@@ -983,7 +990,7 @@ a { text-decoration-thickness: .07em; text-underline-offset: .18em; }
 }
 .quiz-q__text { font-family: var(--lq-display); font-weight: 600; font-size: 1.08rem; line-height: 1.45; color: var(--lq-navy); }
 
-.quiz-opts { display: grid; gap: .5rem; }
+.quiz-opts { display: grid; gap: .5rem; clear: both; }
 .quiz-opt {
   position: relative; display: flex; align-items: flex-start; gap: .75rem;
   padding: .7rem .9rem; border: 1.5px solid rgba(8, 42, 101, .14);
