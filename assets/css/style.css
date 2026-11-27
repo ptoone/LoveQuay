@@ -950,3 +950,133 @@ a { text-decoration-thickness: .07em; text-underline-offset: .18em; }
 .section--navy .card-lq .safety-list li::before { border-color: var(--lq-blue); }
 .section--navy .card-lq .safety-list li::after { background: var(--lq-blue); }
 .section--navy .card-lq a:not(.btn) { color: var(--lq-blue); }
+
+/* --------------------------------------------------------------------------
+   The citizenship test
+   Twenty-five questions on a page that most people will meet on a phone, so
+   every option is a full-width target rather than a radio button to be poked
+   at. The radio itself stays in the DOM and keeps focus and keyboard
+   behaviour; it is only moved out of sight, never display:none.
+
+   Selected state is painted twice on purpose: the sibling selectors do the
+   chip and the label text and work everywhere, and :has() adds the card tint
+   where it is supported. Losing the tint costs nothing; losing the chip would
+   leave the answer unreadable.
+   -------------------------------------------------------------------------- */
+.quiz-name { max-width: 34rem; margin-bottom: 3rem; }
+
+.quiz-part { margin: 3.5rem 0 1.5rem; }
+.quiz-part:first-child { margin-top: 0; }
+.quiz-part__title { font-size: clamp(1.5rem, 3vw, 2rem); margin: .2rem 0 .4rem; }
+.quiz-part__blurb { color: var(--lq-muted); margin: 0; max-width: 42rem; }
+
+.quiz-q {
+  background: #fff; border: 1px solid rgba(8, 42, 101, .1);
+  border-radius: var(--lq-radius); padding: 1.6rem 1.5rem 1.2rem;
+  margin-bottom: 1.1rem; scroll-margin-top: calc(var(--lq-nav-h) + 1rem);
+}
+.quiz-q.is-missing { border-color: var(--lq-red); box-shadow: 0 0 0 3px rgba(200, 16, 46, .1); }
+.quiz-q__legend { display: flex; gap: .85rem; float: none; width: 100%; padding: 0; margin-bottom: 1rem; }
+.quiz-q__num {
+  flex: 0 0 auto; width: 1.9rem; height: 1.9rem; border-radius: 50%;
+  background: var(--lq-navy); color: #fff;
+  font-family: var(--lq-display); font-weight: 700; font-size: .85rem;
+  display: flex; align-items: center; justify-content: center;
+}
+.quiz-q__text { font-family: var(--lq-display); font-weight: 600; font-size: 1.08rem; line-height: 1.45; color: var(--lq-navy); }
+
+.quiz-opts { display: grid; gap: .5rem; }
+.quiz-opt {
+  position: relative; display: flex; align-items: flex-start; gap: .75rem;
+  padding: .7rem .9rem; border: 1.5px solid rgba(8, 42, 101, .14);
+  border-radius: var(--lq-radius-sm); cursor: pointer;
+  transition: border-color .15s ease, background .15s ease;
+}
+.quiz-opt:hover { border-color: rgba(0, 86, 184, .45); }
+.quiz-opt input {
+  position: absolute; width: 1px; height: 1px; opacity: 0;
+  margin: 0; pointer-events: none;
+}
+.quiz-opt__key {
+  flex: 0 0 auto; width: 1.6rem; height: 1.6rem; border-radius: 50%;
+  border: 1.5px solid rgba(8, 42, 101, .3); color: var(--lq-muted);
+  font-family: var(--lq-display); font-weight: 700; font-size: .78rem;
+  display: flex; align-items: center; justify-content: center;
+}
+.quiz-opt__text { line-height: 1.45; }
+.quiz-opt input:checked ~ .quiz-opt__key { background: var(--lq-blue); border-color: var(--lq-blue); color: #fff; }
+.quiz-opt input:checked ~ .quiz-opt__text { color: var(--lq-navy); font-weight: 600; }
+.quiz-opt input:focus-visible ~ .quiz-opt__key { box-shadow: 0 0 0 4px rgba(0, 86, 184, .25); }
+.quiz-opt:has(input:checked) { border-color: var(--lq-blue); background: rgba(0, 86, 184, .05); }
+.quiz-opt:has(input:focus-visible) { border-color: var(--lq-blue); }
+@media (prefers-reduced-motion: reduce) { .quiz-opt { transition: none; } }
+
+/* Marked and locked. The questions stay on screen because the review below
+   refers to them, but they stop being answerable, so the two cannot disagree. */
+.quiz-q:disabled { opacity: .7; }
+.quiz-q:disabled .quiz-opt { cursor: default; }
+.quiz-q:disabled .quiz-opt:hover { border-color: rgba(8, 42, 101, .14); }
+.quiz-q:disabled .quiz-opt:has(input:checked) { border-color: var(--lq-blue); }
+
+/* The bar is the only thing on the page that tells you how much is left. */
+.quiz-foot { margin-top: 2.5rem; }
+.quiz-progress {
+  height: 7px; border-radius: 99px; background: rgba(8, 42, 101, .12);
+  overflow: hidden; max-width: 24rem;
+}
+.quiz-progress span { display: block; height: 100%; width: 0; background: var(--lq-blue); transition: width .2s ease; }
+.quiz-progress__label { font-size: .9rem; color: var(--lq-muted); margin: .5rem 0 1.25rem; }
+@media (prefers-reduced-motion: reduce) { .quiz-progress span { transition: none; } }
+
+.quiz-result {
+  display: none; margin-top: 2.5rem; padding: 2rem 1.9rem;
+  border-radius: var(--lq-radius); border-left: 6px solid var(--lq-muted); background: #F2F4F7;
+  scroll-margin-top: calc(var(--lq-nav-h) + 1rem);
+}
+.quiz-result.is-shown { display: block; }
+.quiz-result--pass { background: #E8F6ED; border-left-color: #1C8C4B; }
+.quiz-result--fail { background: #FFF4E5; border-left-color: #C77700; }
+.quiz-result__score {
+  font-family: var(--lq-display); font-weight: 800;
+  font-size: clamp(2.2rem, 7vw, 3.2rem); line-height: 1; margin: 0;
+}
+.quiz-result--pass .quiz-result__score { color: #15693a; }
+.quiz-result--fail .quiz-result__score { color: #8A5300; }
+.quiz-result__head { font-family: var(--lq-display); font-weight: 700; font-size: 1.4rem; margin: .5rem 0 .6rem; }
+.quiz-result__body { margin: 0 0 1rem; max-width: 44rem; }
+.quiz-result__note { font-size: .92rem; color: var(--lq-muted); margin: 1.4rem 0 0; max-width: 44rem; }
+
+.quiz-code {
+  background: var(--lq-navy); color: #fff;
+  border-radius: var(--lq-radius); padding: 1.5rem 1.6rem; margin-top: 1.25rem;
+}
+.quiz-code__label {
+  font-size: .72rem; letter-spacing: .16em; text-transform: uppercase;
+  color: rgba(255, 255, 255, .6); margin: 0 0 .6rem;
+}
+.quiz-code__value {
+  font-family: var(--lq-display); font-weight: 700;
+  font-size: clamp(.95rem, 3.2vw, 1.5rem); letter-spacing: .06em;
+  overflow-wrap: anywhere; margin: 0; color: #fff;
+}
+.quiz-code__meta { font-size: .88rem; color: rgba(255, 255, 255, .65); margin: .7rem 0 0; }
+.quiz-code .btn-outline-navy { border-color: rgba(255, 255, 255, .5); color: #fff; }
+.quiz-code .btn-outline-navy:hover { background: #fff; color: var(--lq-navy); border-color: #fff; }
+
+.quiz-review { display: none; margin-top: 3rem; }
+.quiz-review.is-shown { display: block; }
+.quiz-review__title { font-size: clamp(1.5rem, 3vw, 2rem); margin-bottom: 1.5rem; }
+.quiz-review__q {
+  background: #fff; border: 1px solid rgba(8, 42, 101, .1);
+  border-left: 5px solid #1C8C4B;
+  border-radius: var(--lq-radius-sm); padding: 1.1rem 1.3rem; margin-bottom: .75rem;
+}
+.quiz-review__q.is-wrong { border-left-color: var(--lq-red); }
+.quiz-review__head { display: flex; gap: .7rem; align-items: baseline; margin: 0 0 .6rem; }
+.quiz-review__num { color: var(--lq-muted); font-family: var(--lq-display); font-weight: 700; font-size: .85rem; }
+.quiz-review__mark { color: #1C8C4B; font-weight: 700; }
+.is-wrong .quiz-review__mark { color: var(--lq-red); }
+.quiz-review__text { font-family: var(--lq-display); font-weight: 600; color: var(--lq-navy); line-height: 1.45; }
+.quiz-review__yours { color: var(--lq-red); font-size: .94rem; margin: 0 0 .3rem; }
+.quiz-review__right { font-weight: 600; margin: 0 0 .4rem; }
+.quiz-review__why { font-size: .94rem; color: var(--lq-muted); margin: 0; }
