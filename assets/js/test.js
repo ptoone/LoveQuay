@@ -13,9 +13,16 @@
  * says that too.
  *
  * The code itself is 32 characters of the card alphabet from lqid.js — the
- * 31 Crockford symbols with I, L, O, U and Z left out — derived from a
- * SHA-256 over the taker's name, the date, the score and the answers given.
- * Same inputs, same code, every time; different answers, different code.
+ * 31 Crockford symbols with I, L, O, U and Z left out — drawn straight from
+ * the browser's cryptographic random source, so every sitting gets its own.
+ *
+ * It used to be a SHA-256 over the taker's name and answers, which made the
+ * same paper reproduce the same code. The name field has gone, and without it
+ * that property turns into a defect rather than a feature: two people who
+ * answered identically on the same day would be handed the same code and it
+ * would look broken. Random is also the more honest shape, since a derived
+ * code implies it encodes something a reader could check, and there is no
+ * server here to check it against.
  *
  * Every `why` below is drawn from a page on this site, and `ref` points at it.
  * If the site changes, these change with it, or the test starts lying.
@@ -36,7 +43,6 @@
   var PASS = 22;                       // 88%
   var SHUFFLE = true;                  // see the note at the top of this file
   var CODE_LEN = 32;
-  var CODE_VERSION = 'lovequay-citizenship-v1';
   var STORE = 'lq.test.v1';
   var FALLBACK_ALPHABET = '0123456789ABCDEFGHJKMNPQRSTVWXY';
 
@@ -269,7 +275,6 @@
   if (!form) return;
 
   var wrap = document.getElementById('lqTestQuestions');
-  var nameIn = document.getElementById('lqTestName');
   var submit = document.getElementById('lqTestSubmit');
   var progress = document.getElementById('lqTestProgress');
   var bar = document.getElementById('lqTestBar');
@@ -380,7 +385,7 @@
    * anybody else's machine, and it never leaves this one. */
   function save(list) {
     try {
-      localStorage.setItem(STORE, JSON.stringify({ a: list, n: nameIn.value }));
+      localStorage.setItem(STORE, JSON.stringify({ a: list }));
     } catch (e) { /* private window, blocked storage: carry on without it */ }
   }
 
@@ -396,7 +401,6 @@
       var hit = form.querySelector('#q' + (i + 1) + 'o' + shownOf(i, v));
       if (hit) hit.checked = true;
     });
-    if (saved.n) nameIn.value = saved.n;
   }
 
   function forget() {
@@ -404,50 +408,42 @@
   }
 
   form.addEventListener('change', tick);
-  nameIn.addEventListener('input', function () { save(answers()); });
 
   /* --------------------------------------------------------------- code -- */
-
-  function digest(str) {
-    return crypto.subtle.digest('SHA-256', new TextEncoder().encode(str))
-      .then(function (buf) { return new Uint8Array(buf); });
-  }
 
   /* 32 symbols from the 31-character card alphabet. A byte taken modulo 31
    * would be biased, because 256 is not a multiple of 31 and the first eight
    * symbols would come up slightly more often; bytes of 248 and over are
-   * thrown away instead, and the stream is extended by rehashing until 32
-   * symbols have survived. Same reasoning as the check character in lqid.js,
-   * where using a power of two quietly broke the arithmetic. */
-  function makeCode(payload) {
+   * thrown away instead and more are drawn until 32 have survived. Same
+   * reasoning as the check character in lqid.js, where using a power of two
+   * quietly broke the arithmetic.
+   *
+   * getRandomValues rather than SHA-256: it needs no secure context, so the
+   * code still appears on a page opened over plain http or straight off the
+   * filesystem, where crypto.subtle is simply absent. */
+  function makeCode() {
     var alpha = (window.LQID && window.LQID.ALPHABET) || FALLBACK_ALPHABET;
     var size = alpha.length;
     var limit = 256 - (256 % size);
     var out = '';
 
-    function round(i) {
-      if (out.length >= CODE_LEN || i > 15) return Promise.resolve(out.slice(0, CODE_LEN));
-      return digest(payload + '#' + i).then(function (bytes) {
-        for (var b = 0; b < bytes.length && out.length < CODE_LEN; b++) {
-          if (bytes[b] < limit) out += alpha[bytes[b] % size];
-        }
-        return round(i + 1);
-      });
+    while (out.length < CODE_LEN) {
+      var bytes = new Uint8Array(CODE_LEN);
+      crypto.getRandomValues(bytes);
+      for (var b = 0; b < bytes.length && out.length < CODE_LEN; b++) {
+        if (bytes[b] < limit) out += alpha[bytes[b] % size];
+      }
     }
-    return round(0);
+    return out;
   }
 
   function groupCode(code) {
     return code.replace(/(.{8})(?=.)/g, '$1-');
   }
 
-  function cleanName(raw) {
-    return String(raw || '').replace(/\s+/g, ' ').trim().slice(0, 60);
-  }
-
   /* ------------------------------------------------------------ marking -- */
 
-  function markup(list, score, name, date) {
+  function markup(list, score, date) {
     var passed = score >= PASS;
 
     result.className = 'quiz-result is-shown ' + (passed ? 'quiz-result--pass' : 'quiz-result--fail');
@@ -468,8 +464,7 @@
       codeBox.appendChild(el('p', 'quiz-code__label', 'Citizenship code'));
       codeBox.appendChild(codeOut);
 
-      var meta = el('p', 'quiz-code__meta',
-        (name ? name + ' · ' : '') + date + ' · ' + score + '/' + TOTAL);
+      var meta = el('p', 'quiz-code__meta', date + ' · ' + score + '/' + TOTAL);
       codeBox.appendChild(meta);
 
       var copy = el('button', 'btn btn-outline-navy btn-sm mt-3', 'Copy the code');
@@ -477,36 +472,33 @@
       codeBox.appendChild(copy);
       result.appendChild(codeBox);
 
-      var payload = [CODE_VERSION, name, date, score + '/' + TOTAL, list.join('')].join('|');
-
-      if (!window.crypto || !crypto.subtle) {
+      if (!window.crypto || !crypto.getRandomValues) {
         codeOut.textContent = 'unavailable';
         result.appendChild(el('p', 'quiz-result__body',
-          'This browser will not generate the code. It needs SHA-256 over a secure connection, '
-          + 'which means an up-to-date browser on https://lovequay.com.'));
+          'This browser has no cryptographic random source, so it cannot make a code. '
+          + 'Everything else on this page still works.'));
       } else {
-        makeCode(payload).then(function (code) {
-          codeOut.textContent = groupCode(code);
-          copy.addEventListener('click', function () {
-            var ok = function () {
-              copy.textContent = 'Copied';
-              setTimeout(function () { copy.textContent = 'Copy the code'; }, 2000);
-            };
-            if (navigator.clipboard && navigator.clipboard.writeText) {
-              navigator.clipboard.writeText(code).then(ok, function () { copy.textContent = 'Select it by hand'; });
-            } else {
-              copy.textContent = 'Select it by hand';
-            }
-          });
+        var code = makeCode();
+        codeOut.textContent = groupCode(code);
+        copy.addEventListener('click', function () {
+          var ok = function () {
+            copy.textContent = 'Copied';
+            setTimeout(function () { copy.textContent = 'Copy the code'; }, 2000);
+          };
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(code).then(ok, function () { copy.textContent = 'Select it by hand'; });
+          } else {
+            copy.textContent = 'Select it by hand';
+          }
         });
       }
 
       result.appendChild(el('p', 'quiz-result__note',
-        'The code is worked out from your name, today’s date, your score and the answers you '
-        + 'gave. The same answers always produce the same code, and different answers produce a '
-        + 'different one. It is a receipt for having sat the test — it is not a card, it is '
-        + 'not identification, and it entitles you to nothing at the water. Nobody needs anything '
-        + 'from anyone to swim here.'));
+        'The code is drawn at random on your own device the moment you pass, so it is yours and '
+        + 'nobody else will be given it. Write it down now — nothing stores it, and starting the '
+        + 'test again produces a different one. It is a receipt for having sat the test: it is '
+        + 'not a card, it is not identification, and it entitles you to nothing at the water. '
+        + 'Nobody needs anything from anyone to swim here.'));
     } else {
       result.appendChild(el('p', 'quiz-result__body',
         'You need ' + PASS + ' of ' + TOTAL + '. Every question you missed is below, with the '
@@ -576,7 +568,7 @@
     flat.forEach(function (q, i) { if (list[i] === q.correct) score++; });
 
     var date = new Date().toISOString().slice(0, 10);
-    markup(list, score, cleanName(nameIn.value), date);
+    markup(list, score, date);
 
     /* Lock the answers once they have been marked. The review underneath is a
      * record of this attempt; letting someone keep clicking options would

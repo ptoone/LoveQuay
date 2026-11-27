@@ -963,8 +963,6 @@ a { text-decoration-thickness: .07em; text-underline-offset: .18em; }
    where it is supported. Losing the tint costs nothing; losing the chip would
    leave the answer unreadable.
    -------------------------------------------------------------------------- */
-.quiz-name { max-width: 34rem; margin-bottom: 3rem; }
-
 .quiz-part { margin: 3.5rem 0 1.5rem; }
 .quiz-part:first-child { margin-top: 0; }
 .quiz-part__title { font-size: clamp(1.5rem, 3vw, 2rem); margin: .2rem 0 .4rem; }
