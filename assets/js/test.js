@@ -75,13 +75,6 @@
           ref: 'swim.html#where', refLabel: 'Where to swim'
         },
         {
-          q: 'How many safety ladders are located at the swimming end of LoveQuay?',
-          a: ['Two', 'One', 'Three', 'Four'],
-          correct: 0,
-          why: 'Two, flanking the swimming spot: one straight, one angled like a set of stairs.',
-          ref: 'swim.html#ladders', refLabel: 'Two ladders, one plan'
-        },
-        {
           q: 'Approximately how long is the stretch of water normally used by LoveQuay swimmers?',
           a: ['50 metres', '100 metres', '150 metres', '400 metres'],
           correct: 2,
@@ -168,6 +161,17 @@
               'Before entering the water, on every visit'],
           correct: 3,
           why: 'Getting out is harder than getting in. Know which ladder you are heading for, and check you can reach it, before you are in the water.',
+          ref: 'swim.html#ladders', refLabel: 'Two ladders, one plan'
+        },
+        {
+          q: 'What should you do if strong winds or waves make it difficult to safely reach or '
+             + 'climb the exit ladder at LoveQuay?',
+          a: ['Enter the water and assess conditions while swimming',
+              'Avoid entering the water and return when conditions improve',
+              'Swim further away from the pier to avoid the waves',
+              'Enter the water if other swimmers are already swimming'],
+          correct: 1,
+          why: 'A ladder you cannot reach or hold in chop is not an exit, and the time to find that out is from the deck. The lake will still be here tomorrow.',
           ref: 'swim.html#ladders', refLabel: 'Two ladders, one plan'
         },
         {
