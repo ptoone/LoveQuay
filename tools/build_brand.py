@@ -146,6 +146,40 @@ def mark_box(h):
     return w, x0, y0, x1 - x0, y1 - y0
 
 
+# ---------------------------------------------------------------- swimmer ---
+# The swimmer is supplied artwork, not geometry this file derives, so it is
+# read out of its own SVG and placed rather than redrawn.
+# assets/brand/logo-swimmer.svg is the master: edit that and everything below
+# follows it.
+_SWIM = io.open(os.path.join(OUT, "logo-swimmer.svg"), encoding="utf-8").read()
+SWIM_VB = [float(v) for v in re.search(r'viewBox="([^"]+)"', _SWIM).group(1).split()]
+SWIM_BODY = _SWIM[_SWIM.index(">", _SWIM.index("<svg")) + 1:_SWIM.rindex("</svg>")]
+
+# On navy the artwork's pure blue all but disappears: #0000FF on #082A65 is a
+# contrast ratio of 1.58:1, so the two rows of water close into a single dark
+# band and the swimmer looks like it is floating on nothing. The reversed cut
+# lifts that one colour to the palette's light blue and leaves the rest exactly
+# as drawn — red and green measure 3.4:1 and 3.9:1 there, which is enough for a
+# mark that carries no text.
+SWIM_REV = {"#0000ff": "#5CA8FF"}
+SWIM_WHITE = {"#0000ff": WHITE, "#ff0000": WHITE, "#00a000": WHITE}
+
+
+def swimmer(x, y, w, h, colours=None):
+    body = SWIM_BODY
+    for old, new in (colours or {}).items():
+        body = re.sub(re.escape(old), new, body, flags=re.I)
+    sx, sy = w / SWIM_VB[2], h / SWIM_VB[3]
+    return (f'<g transform="translate({x - SWIM_VB[0] * sx:.4f},'
+            f'{y - SWIM_VB[1] * sy:.4f}) scale({sx:.6f},{sy:.6f})">{body}</g>')
+
+
+def swimmer_box(h):
+    """The swimmer's viewBox was already trimmed to its ink, so its extents are
+    its box — no coping pushing out and no ladder poking up to allow for."""
+    return h * SWIM_VB[2] / SWIM_VB[3], 0.0, 0.0, h * SWIM_VB[2] / SWIM_VB[3], h
+
+
 # --------------------------------------------------------------- wordmark ---
 SUMW = sum(b[2] for b in B)          # the eight letters, side by side, untracked
 TRACK = 0.035                        # letter gap as a share of cap height
@@ -235,10 +269,10 @@ def png(src, dst, px, by_width=True):
 TAG_RATIO = 0.26      # tagline cap, as a share of the wordmark cap
 
 
-def stacked(mark_fn, word_fill, tag_fill, label, bg=None, tag=True):
+def stacked(mark_fn, word_fill, tag_fill, label, bg=None, tag=True, box_fn=None):
     """Mark over the wordmark. The primary lockup."""
     H = 1000.0
-    w, mx, my, mw, mh = mark_box(H)
+    w, mx, my, mw, mh = (box_fn or mark_box)(H)
     word_w = mw * 1.12
     cap = cap_for(word_w)
     body = mark_fn(0, 0, w, H)
@@ -261,10 +295,10 @@ def stacked(mark_fn, word_fill, tag_fill, label, bg=None, tag=True):
                bottom - my + pad * 2, label, bg)
 
 
-def horizontal(mark_fn, word_fill, tag_fill, label, bg=None, tag=True):
+def horizontal(mark_fn, word_fill, tag_fill, label, bg=None, tag=True, box_fn=None):
     """Mark left, type right. For wide spaces and the footer."""
     H = 1000.0
-    w, mx, my, mw, mh = mark_box(H)
+    w, mx, my, mw, mh = (box_fn or mark_box)(H)
     sep = mw * 0.30
     cap = mh * 0.235
     word_w = word_width(cap)
@@ -283,11 +317,11 @@ def horizontal(mark_fn, word_fill, tag_fill, label, bg=None, tag=True):
     return svg(body, mx - pad, my - pad, (tx + word_w) - mx + pad * 2, mh + pad * 2, label, bg)
 
 
-def inline(mark_fn, word_fill, label, bg=None):
+def inline(mark_fn, word_fill, label, bg=None, box_fn=None):
     """Short and wide, for navigation bars under 40 px tall. No tagline — it
     turns to mud at that size."""
     H = 1000.0
-    w, mx, my, mw, mh = mark_box(H)
+    w, mx, my, mw, mh = (box_fn or mark_box)(H)
     sep = mw * 0.26
     # A taller cap than the other lockups: at 44 px the mark eats the height and
     # the letters have to hold their own.
@@ -313,6 +347,21 @@ def tile(bg, basin, water, cope, rim, radius=0.1875, frac=0.74):
             f'width="512" height="512" role="img" aria-label="LoveQuay">'
             f'<rect width="512" height="512" rx="{N * radius:.0f}" fill="{bg}"/>'
             f'<g transform="translate({dx:.2f},{dy:.2f})">{body}</g></svg>')
+
+
+def swim_tile(bg, colours=None, radius=0.1875, frac=0.74):
+    """The same square app icon, with the swimmer in it.
+
+    The swimmer is a whisker wider than tall, so it is fitted by whichever side
+    runs out first rather than by height — fitting by height alone would push
+    the ring's shoulders into the corner radius."""
+    N = 512.0
+    s = N * frac / max(SWIM_VB[2], SWIM_VB[3])
+    w, h = SWIM_VB[2] * s, SWIM_VB[3] * s
+    return (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" '
+            f'width="512" height="512" role="img" aria-label="LoveQuay">'
+            f'<rect width="512" height="512" rx="{N * radius:.0f}" fill="{bg}"/>'
+            + swimmer((N - w) / 2, (N - h) / 2, w, h, colours) + '</svg>')
 
 
 LOVE, QUAY = (0, 1, 2, 3), (4, 5, 6, 7)
@@ -428,8 +477,32 @@ def main():
     write("logo-inline.svg", inline(colour, SIGN, L))
     write("logo-inline-white.svg", inline(rev, WHITE, L))
 
+    # The swimmer drives the same four lockups. Same wordmark, same tracking,
+    # same padding rule - only the mark and the box it measures change, which
+    # is why the lockup helpers take a box function rather than assuming the
+    # heart's.
+    print("swimmer lockups")
+    swim = lambda x, y, a, b: swimmer(x, y, a, b)                          # noqa: E731
+    swim_rev = lambda x, y, a, b: swimmer(x, y, a, b, SWIM_REV)            # noqa: E731
+    SB = swimmer_box
+    write("logo-swimmer-stacked.svg", stacked(swim, SIGN, NAVY, L, box_fn=SB))
+    write("logo-swimmer-stacked-white.svg",
+          stacked(swim_rev, WHITE, "#8FD0FF", L, box_fn=SB))
+    write("logo-swimmer-horizontal.svg", horizontal(swim, SIGN, NAVY, L, box_fn=SB))
+    write("logo-swimmer-horizontal-white.svg",
+          horizontal(swim_rev, WHITE, "#8FD0FF", L, box_fn=SB))
+    write("logo-swimmer-inline.svg", inline(swim, SIGN, L, box_fn=SB))
+    write("logo-swimmer-inline-white.svg", inline(swim_rev, WHITE, L, box_fn=SB))
+
+    # favicon.svg is the site's icon by name, and the site's icon is now the
+    # swimmer, so this file carries the swimmer and the heart tile keeps its
+    # old art under -heart. Everything downstream - favicon.ico, the apple
+    # touch icon, the manifest's 192 and 512 - renders from favicon.svg and
+    # follows without further change.
     print("icons")
-    write("favicon.svg", tile(NAVY, NAVY_LT, WATER_LT, "#061E4A", NAVY))
+    write("favicon.svg", swim_tile(NAVY, SWIM_REV))
+    write("swim-tile-white.svg", swim_tile(WHITE))
+    write("favicon-heart.svg", tile(NAVY, NAVY_LT, WATER_LT, "#061E4A", NAVY))
     write("tile-white.svg", tile(WHITE, BASIN, WATER, NAVY, WHITE))
     write("tile-word-navy.svg", word_tile(NAVY, WHITE))
     write("tile-word-red.svg", word_tile(SIGN, WHITE))
@@ -444,6 +517,11 @@ def main():
         png("logo-horizontal.svg", "logo-horizontal-1200.png", 1200)
         png("logo-horizontal-white.svg", "logo-horizontal-white-1200.png", 1200)
         png("logo-inline.svg", "logo-inline-800.png", 800)
+        png("logo-swimmer-horizontal.svg", "logo-swimmer-horizontal-1200.png", 1200)
+        png("logo-swimmer-horizontal-white.svg", "logo-swimmer-horizontal-white-1200.png", 1200)
+        png("logo-swimmer-inline.svg", "logo-swimmer-inline-800.png", 800)
+        png("logo-swimmer-stacked.svg", "logo-swimmer-stacked-1000.png", 1000)
+        png("swim-tile-white.svg", "swim-tile-white-512.png", 512)
         png("favicon.svg", "favicon-16.png", 16)
         png("favicon.svg", "favicon-32.png", 32)
         png("favicon.svg", "apple-touch-icon.png", 180)
