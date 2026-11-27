@@ -62,9 +62,9 @@
         },
         {
           q: 'Approximately how wide is the LoveQuay pier?',
-          a: ['3 metres', '7.5 metres', '12 metres', '15 metres'],
+          a: ['3 metres', '6 metres', '12 metres', '15 metres'],
           correct: 1,
-          why: 'Seven and a half metres. It is a working pier, not a promenade — there is not much room either side of you.',
+          why: 'Six metres. It is a working pier, not a promenade — there is not much room either side of you.',
           ref: 'index.html', refLabel: 'The Pier'
         },
         {
